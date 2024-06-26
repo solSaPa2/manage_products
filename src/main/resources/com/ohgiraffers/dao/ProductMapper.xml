@@ -4,4 +4,37 @@
         "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.ohgiraffers.dao.ProductMapper">
 
+    <resultMap id="productResultMap1" type="com.ohgiraffers.dto.ProductDTO">
+        <id property="productCode" column="product_code"/>
+        <result property="productName" column="product_Name"/>
+        <result property="categoryCode" column="category_code"/>
+        <result property="productQuantity" column="product_quantity"/>
+        <result property="productDetail" column="product_detail"/>
+    </resultMap>
+
+   <select id="selectAllProduct" resultMap="productResultMap1">
+        select
+        product_code,
+        product_name,
+        category_code,
+        product_quantity,
+        product_detail
+        from product
+   </select>
+
+    <resultMap id="productResultMap2" type="com.ohgiraffers.dto.ProductDTO">
+        <id property="productCode" column="product_code"/>
+        <result property="productName" column="product_Name"/>
+        <result property="categoryCode" column="category_code"/>
+        <result property="productQuantity" column="product_quantity"/>
+        <result property="productDetail" column="product_detail"/>
+    </resultMap>
+
+    <delete id="deleteProduct" parameterType="_int">
+        delete
+        from product
+        where product_code = #{ productCode }
+    </delete>
+
+
 </mapper>
