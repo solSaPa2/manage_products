@@ -7,7 +7,7 @@ import java.util.Map;
 import java.util.Scanner;
 
 public class MemberView {
-    public boolean memberSubMenu(boolean loggedIn) {
+    public Map<String, String> memberSubMenu(Map<String, String> loginInfo) {
         Scanner sc = new Scanner(System.in);
         MemberController memberController = new MemberController();
 
@@ -15,7 +15,7 @@ public class MemberView {
 
         do {
             System.out.println("\n========== 회원 메뉴 ==========");
-            if (loggedIn){
+            if (loginInfo.get("login").equals("true")){
                 System.out.println("1. 로그아웃\n2. 회원 정보 수정\n3. 회원 정보 조회\n4. 회원 탈퇴\n0. 이전 메뉴로");
                 System.out.println("--------------------------------------------");
                 System.out.print("번호 입력: ");
@@ -23,9 +23,9 @@ public class MemberView {
                 sc.nextLine();
 
                 switch (no){
-                    case 1: loggedIn = logout(loggedIn); break;
+                    case 1: loginInfo = logout(loginInfo); break;
 //                    case 2: memberController.updateMember(); break;
-//                    case 3: memberController.selectMember(); break;
+                    case 3: memberController.selectMember(loginInfo); break;
 //                    case 4: memberController.deleteMember(); break;
                     case 0: flag = false; break;
                 }
@@ -37,7 +37,7 @@ public class MemberView {
                 sc.nextLine();
 
                 switch (no){
-                    case 1: loggedIn = memberController.selectLoginInfo(inputLoginInfo()); break;
+                    case 1: loginInfo = memberController.selectLoginInfo(inputLoginInfo()); break;
                     case 2: memberController.insertMember(inputNewMember()); break;
                     case 0: flag = false; break;
                 }
@@ -45,15 +45,16 @@ public class MemberView {
 
         } while (flag);
 
-        return loggedIn;
+        return loginInfo;
     }
 
-    private boolean logout(boolean loggedIn) {
-        if (loggedIn){
-            loggedIn = false;
+    private Map<String,String> logout(Map<String,String> loginInfo) {
+       if (loginInfo.get("login").equals("true")){
+            loginInfo.put("login","false");
+            loginInfo.put("memberId","");
             System.out.println("로그아웃 되었습니다.");
         }
-        return loggedIn;
+        return loginInfo;
     }
 
     public Map<String, String> inputLoginInfo(){
