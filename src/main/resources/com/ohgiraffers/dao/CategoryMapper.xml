@@ -8,14 +8,14 @@
         <result property="categoryName" column="category_name"/>
     </resultMap>
 
-    <select id="insertCategory" resultMap="categoryResultMap">
+    <insert id="insertCategory" parameterType="com.ohgiraffers.dto.CategoryDTO">
         insert into category (
         category_name
         ) values (
         #{ categoryName }
         )
 
-    </select>
+    </insert>
 
     <select id="selectAllCategory" resultMap="categoryResultMap">
         select
