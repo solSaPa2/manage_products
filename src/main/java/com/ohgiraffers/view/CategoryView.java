@@ -2,6 +2,8 @@ package com.ohgiraffers.view;
 
 import com.ohgiraffers.controller.CategoryController;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Scanner;
 
 public class CategoryView {
@@ -18,7 +20,7 @@ public class CategoryView {
             sc.nextLine();
 
             switch (no){
-//                case 1: categoryController.insertCategory(); break;
+                case 1: categoryController.insertCategory(inputInsertCategory()); break;
 //                case 2: categoryController.updateCategory(); break;
 //                case 3: categoryController.deleteCategory(); break;
 //                case 4: categoryController.selectAllCategory(); break;
@@ -26,6 +28,21 @@ public class CategoryView {
                 case 0: return;
             }
         } while (true);
+    }
+
+    private static Map<String, String> inputInsertCategory() {
+
+        Scanner sc = new Scanner(System.in);
+
+        System.out.print("카테고리 이름을 입력하세요 : ");
+        String categoryName = sc.nextLine();
+
+
+        Map<String, String> parameter = new HashMap<>();
+
+        parameter.put("categoryName",categoryName);
+
+        return parameter;
     }
 
 
