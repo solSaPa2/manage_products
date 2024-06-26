@@ -21,7 +21,7 @@ public class ProductView {
 //                case 1: productController.insertProduct(); break;
 //                case 2: productController.updateProduct(); break;
 //                case 3: productController.deleteProduct(); break;
-//                case 4: productController.selectAllProducts(); break;
+                case 4: productController.selectAllProducts(); break;
 //                case 5: productController.selectProductByCode(); break;
                 case 0: return;
             }

@@ -10,21 +10,18 @@ import static com.ohgiraffers.common.Template.getSqlSession;
 
 public class ProductService {
 
-    private final ProductMapper mapper;
+    private ProductMapper productMapper;
 
     public List<ProductDTO> selectAllProducts() {
 
         SqlSession sqlSession = getSqlSession();
-        mapper = sqlSession.getMapper(ProductMapper.class);
+        productMapper = sqlSession.getMapper(ProductMapper.class);
 
-        List<ProductDTO> productList = mapper.selectAllProduct();
-
-        for(ProductDTO productDTO : productList){
-            System.out.println(productDTO);
-        }
+        List<ProductDTO> productList = productMapper.selectAllProduct();
 
         sqlSession.close();
-    }
 
+        return productList;
+    }
 
 }
