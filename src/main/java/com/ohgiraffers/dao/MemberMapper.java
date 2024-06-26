@@ -6,4 +6,8 @@ import java.util.Map;
 
 public interface MemberMapper {
     MemberDTO selectLoginInfo(Map<String, String> map);
+
+    int insertMember(Map<String, String> map);
+
+    MemberDTO selectExistingId(String memberId);
 }
