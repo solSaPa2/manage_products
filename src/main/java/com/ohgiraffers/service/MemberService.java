@@ -50,4 +50,15 @@ public class MemberService {
 
         return member;
     }
+
+    public MemberDTO selectMember(String memberId) {
+        SqlSession sqlSession = getSqlSession();
+        mapper = sqlSession.getMapper(MemberMapper.class);
+
+        MemberDTO member = mapper.selectExistingId(memberId);
+
+        sqlSession.close();
+
+        return member;
+    }
 }
