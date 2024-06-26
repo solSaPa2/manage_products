@@ -29,4 +29,15 @@
         FROM member
         WHERE member_id LIKE #{memberId}
     </select>
+
+    <update id="updateMember" parameterType="hashmap">
+        UPDATE member
+        SET member_id = #{memberId},
+            member_password = #{memberPassword},
+            member_name = #{memberName},
+            member_phone_number = #{memberPhoneNumber},
+            member_identity_number = #{memberIdentityNumber},
+            member_email = #{memberEmail}
+        WHERE member_id = #{previousId}
+    </update>
 </mapper>
