@@ -22,7 +22,7 @@ public class CategoryView {
             switch (no){
                 case 1: categoryController.insertCategory(inputInsertCategory()); break;
                 case 2: categoryController.updateCategory(inputUpdateCategory()); break;
-//                case 3: categoryController.deleteCategory(); break;
+                case 3: categoryController.deleteCategory(inputCategoryCode()); break;
                 case 4: categoryController.selectAllCategory(); break;
 //                case 5: categoryController.selectProductByCategoryCode(); break;
                 case 0: return;
@@ -58,6 +58,18 @@ public class CategoryView {
 
         parameter.put("categoryCode",categoryCode);
         parameter.put("categoryName",categoryName);
+
+        return parameter;
+    }
+
+    private static Map<String, String> inputCategoryCode() {
+
+        Scanner sc = new Scanner(System.in);
+        System.out.print("카테고리 코드를 입력하세요 : ");
+        String categoryCode = sc.nextLine();
+
+        Map<String, String> parameter = new HashMap<>();
+        parameter.put("categoryCode",categoryCode);
 
         return parameter;
     }

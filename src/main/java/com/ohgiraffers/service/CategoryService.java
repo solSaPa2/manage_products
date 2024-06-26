@@ -63,4 +63,23 @@ public class CategoryService {
 
         return result > 0 ? true : false;
     }
+
+    public boolean deleteCategory(int categoryCode) {
+
+        SqlSession sqlSession = getSqlSession();
+
+        categoryMapper = sqlSession.getMapper(CategoryMapper.class);
+
+        int result = categoryMapper.deleteCategory(categoryCode);
+
+        if(result > 0) {
+            sqlSession.commit();
+        } else {
+            sqlSession.rollback();
+        }
+
+        sqlSession.close();
+
+        return result > 0 ? true : false;
+    }
 }

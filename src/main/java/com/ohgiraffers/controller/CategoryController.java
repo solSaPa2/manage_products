@@ -61,4 +61,15 @@ public class CategoryController {
         }
     }
 
+    public void deleteCategory(Map<String, String> parameter) {
+
+        int categoryCode = Integer.parseInt(parameter.get("categoryCode"));
+
+        if (categoryService.deleteCategory(categoryCode)) {
+            System.out.println("카테고리 삭제을 성공했습니다!");
+        } else {
+            System.out.println("카테고리 삭제를 실패했습니다!");
+        }
+    }
+
 }
