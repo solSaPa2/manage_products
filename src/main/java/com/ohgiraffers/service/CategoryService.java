@@ -2,6 +2,8 @@ package com.ohgiraffers.service;
 
 import com.ohgiraffers.dao.CategoryMapper;
 import com.ohgiraffers.dto.CategoryDTO;
+import com.ohgiraffers.dto.CategoryProductDTO;
+import com.ohgiraffers.dto.ProductDTO;
 import org.apache.ibatis.session.SqlSession;
 
 
@@ -81,5 +83,18 @@ public class CategoryService {
         sqlSession.close();
 
         return result > 0 ? true : false;
+    }
+
+    public CategoryProductDTO selectProductByCategoryCode(int categoryCode) {
+
+        SqlSession sqlSession = getSqlSession();
+
+        categoryMapper = sqlSession.getMapper(CategoryMapper.class);
+
+        CategoryProductDTO categoryProduct = categoryMapper.selectProductByCategoryCode(categoryCode);
+
+        sqlSession.close();
+
+        return categoryProduct;
     }
 }

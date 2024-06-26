@@ -1,6 +1,7 @@
 package com.ohgiraffers.view;
 
 import com.ohgiraffers.controller.CategoryController;
+import com.ohgiraffers.service.CategoryService;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -10,6 +11,7 @@ public class CategoryView {
     public void categorySubMenu() {
         Scanner sc = new Scanner(System.in);
         CategoryController categoryController = new CategoryController();
+        CategoryService categoryService = new CategoryService();
 
         do {
             System.out.println("\n========== 카테고리 관리 메뉴 ==========");
@@ -24,7 +26,7 @@ public class CategoryView {
                 case 2: categoryController.updateCategory(inputUpdateCategory()); break;
                 case 3: categoryController.deleteCategory(inputCategoryCode()); break;
                 case 4: categoryController.selectAllCategory(); break;
-//                case 5: categoryController.selectProductByCategoryCode(); break;
+                case 5: categoryController.selectProductByCategoryCode(inputCategoryCode()); break;
                 case 0: return;
             }
         } while (true);
@@ -73,6 +75,10 @@ public class CategoryView {
 
         return parameter;
     }
+
+
+
+
 
 
 }

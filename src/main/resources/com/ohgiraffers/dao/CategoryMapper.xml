@@ -24,7 +24,7 @@
         from category
         order by category_code
     </select>
-    
+
     <update id="updateCategory" parameterType="com.ohgiraffers.dto.CategoryDTO">
         update
         category
@@ -33,11 +33,33 @@
         where
         category_code = #{ categoryCode }
     </update>
-    
-    
+
+
     <delete id="deleteCategory" parameterType="_int">
         delete
         from category
         where category_code = #{ categoryCode }
     </delete>
+
+    <resultMap id="categoryProductResultMap" type="com.ohgiraffers.dto.CategoryProductDTO">
+        <id property="categoryCode" column="category_code"/>
+        <result property="categoryName" column="category_name"/>
+        <collection property="proList" ofType="com.ohgiraffers.dto.ProductDTO">
+            <id property="productCode" column="product_code"/>
+            <result property="productName" column="product_name"/>
+            <result property="categoryCode" column="category_code"/>
+            <result property="productQuantity" column="product_quantity"/>
+            <result property="productDetail" column="product_detail"/>
+        </collection>
+    </resultMap>
+
+    <select id="selectProductByCategoryCode" resultMap="categoryProductResultMap">
+        select
+        *
+        from product a
+        left join category b on (a.category_code = b.category_code)
+        where b.category_code = #{ categoryCode }
+        order by a.category_code
+    </select>
+
 </mapper>
