@@ -19,10 +19,6 @@ public class ProductService {
 
         List<ProductDTO> productList = mapper.selectAllProduct();
 
-        for(ProductDTO productDTO : productList){
-            System.out.println(productDTO);
-        }
-
         sqlSession.close();
         return productList;
     }
@@ -45,5 +41,21 @@ public class ProductService {
     }
 
 
+    public boolean updateProduct(ProductDTO productDTO) {
 
+        SqlSession sqlSession = getSqlSession();
+
+        mapper = sqlSession.getMapper(ProductMapper.class);
+
+        int result = mapper.updateProduct(productDTO);
+
+        if(result > 0){
+            sqlSession.commit();
+        } else {
+            sqlSession.rollback();
+        }
+
+        sqlSession.close();
+        return result > 0 ? true : false;
+    }
 }

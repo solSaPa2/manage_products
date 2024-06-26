@@ -4,7 +4,7 @@
         "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.ohgiraffers.dao.ProductMapper">
 
-    <resultMap id="productResultMap1" type="com.ohgiraffers.dto.ProductDTO">
+    <resultMap id="productResultMap" type="com.ohgiraffers.dto.ProductDTO">
         <id property="productCode" column="product_code"/>
         <result property="productName" column="product_Name"/>
         <result property="categoryCode" column="category_code"/>
@@ -12,7 +12,7 @@
         <result property="productDetail" column="product_detail"/>
     </resultMap>
 
-   <select id="selectAllProduct" resultMap="productResultMap1">
+   <select id="selectAllProduct" resultMap="productResultMap">
         select
         product_code,
         product_name,
@@ -22,19 +22,20 @@
         from product
    </select>
 
-    <resultMap id="productResultMap2" type="com.ohgiraffers.dto.ProductDTO">
-        <id property="productCode" column="product_code"/>
-        <result property="productName" column="product_Name"/>
-        <result property="categoryCode" column="category_code"/>
-        <result property="productQuantity" column="product_quantity"/>
-        <result property="productDetail" column="product_detail"/>
-    </resultMap>
-
     <delete id="deleteProduct" parameterType="_int">
         delete
         from product
         where product_code = #{ productCode }
     </delete>
 
+    <update id="updateProduct" parameterType="com.ohgiraffers.dto.ProductDTO">
+        update product
+        set
+        product_code = #{ productCode },
+        product_name = #{ productName },
+        category_code = #{ categoryCode },
+        product_quantity = #{ productQuantity },
+        product_detail = #{ productDetail }
+    </update>
 
 </mapper>
