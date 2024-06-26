@@ -10,6 +10,7 @@ public class Application {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         boolean flag = true;
+        boolean loggedIn = false;
 
         MemberView memberView = new MemberView();
         ProductView productView = new ProductView();
@@ -26,7 +27,7 @@ public class Application {
             int no = sc.nextInt();
 
             switch (no){
-                case 1: memberView.memberSubMenu(); break;
+                case 1: loggedIn = memberView.memberSubMenu(loggedIn); break;
                 case 2: productView.productSubMenu(); break;
                 case 3: categoryView.categorySubMenu(); break;
                 case 0: flag = false; break;
