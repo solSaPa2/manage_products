@@ -1,6 +1,5 @@
 package com.ohgiraffers;
 
-import com.ohgiraffers.view.CategoryView;
 import com.ohgiraffers.view.MemberView;
 import com.ohgiraffers.view.ProductView;
 
@@ -18,7 +17,7 @@ public class Application {
 
         MemberView memberView = new MemberView();
         ProductView productView = new ProductView();
-        CategoryView categoryView = new CategoryView();
+     //   CategoryView categoryView = new CategoryView();
 
         do{
             System.out.println("\n===== 상품 관리 시스템 =====");
@@ -33,7 +32,7 @@ public class Application {
             switch (no){
                 case 1: loginInfo = memberView.memberSubMenu(loginInfo); break;
                 case 2: productView.productSubMenu(); break;
-                case 3: categoryView.categorySubMenu(); break;
+              //  case 3: categoryView.categorySubMenu(); break;
                 case 0: flag = false; break;
                 default: System.out.println("잘못된 메뉴를 선택하셨습니다."); break;
             }
