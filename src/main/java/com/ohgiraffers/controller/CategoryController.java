@@ -42,4 +42,23 @@ public class CategoryController {
         }
     }
 
+
+    public void updateCategory (Map<String, String> parameter) {
+
+        int categoryCode = Integer.parseInt(parameter.get("categoryCode"));
+        String categoryName = parameter.get("categoryName");
+
+        CategoryDTO category = new CategoryDTO();
+
+        category.setCategoryCode(categoryCode);
+        category.setCategoryName(categoryName);
+
+
+        if (categoryService.updateCategory(category)) {
+            System.out.println("카테고리 수정을 성공했습니다!");
+        } else {
+            System.out.println("카테고리 수정을 실패했습니다!");
+        }
+    }
+
 }
