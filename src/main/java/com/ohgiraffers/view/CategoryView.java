@@ -21,7 +21,7 @@ public class CategoryView {
 
             switch (no){
                 case 1: categoryController.insertCategory(inputInsertCategory()); break;
-//                case 2: categoryController.updateCategory(); break;
+                case 2: categoryController.updateCategory(inputUpdateCategory()); break;
 //                case 3: categoryController.deleteCategory(); break;
                 case 4: categoryController.selectAllCategory(); break;
 //                case 5: categoryController.selectProductByCategoryCode(); break;
@@ -45,7 +45,22 @@ public class CategoryView {
         return parameter;
     }
 
+    private static Map<String, String> inputUpdateCategory() {
 
+        Scanner sc = new Scanner(System.in);
+
+        System.out.print("수정할 카테고리 코드을 입력하세요 : ");
+        String categoryCode = sc.nextLine();
+        System.out.print("수정할 카테고리 이름을 입력하세요 : ");
+        String categoryName = sc.nextLine();
+
+        Map<String, String> parameter = new HashMap<>();
+
+        parameter.put("categoryCode",categoryCode);
+        parameter.put("categoryName",categoryName);
+
+        return parameter;
+    }
 
 
 }

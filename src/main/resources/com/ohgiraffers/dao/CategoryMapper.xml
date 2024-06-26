@@ -24,4 +24,13 @@
         from category
         order by category_code
     </select>
+    
+    <update id="updateCategory" parameterType="com.ohgiraffers.dto.CategoryDTO">
+        update
+        category
+        set
+        category_name = #{ categoryName }
+        where
+        category_code = #{ categoryCode }
+    </update>
 </mapper>
