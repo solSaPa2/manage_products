@@ -8,5 +8,6 @@ public interface ProductMapper {
 
     List<ProductDTO> selectAllProduct();
 
-    List<ProductDTO> deleteProduct();
+    int deleteProduct(int code);
+
 }

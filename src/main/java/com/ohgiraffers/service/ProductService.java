@@ -27,19 +27,21 @@ public class ProductService {
         return productList;
     }
 
-    public List<ProductDTO> deleteProduct(){
+    public boolean deleteProduct(int code){
 
         SqlSession sqlSession = getSqlSession();
         mapper = sqlSession.getMapper(ProductMapper.class);
 
-        List<ProductDTO> productList = mapper.deleteProduct();
+        int result = mapper.deleteProduct(code);
 
-        for(ProductDTO productDTO : productList){
-            System.out.println(productDTO);
+        if(result > 0){
+            sqlSession.commit();
+        } else {
+            sqlSession.rollback();
         }
 
         sqlSession.close();
-        return deleteProduct();
+        return result > 0 ? true : false;
     }
 
 
