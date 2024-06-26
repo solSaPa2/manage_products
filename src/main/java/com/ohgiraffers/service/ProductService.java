@@ -10,18 +10,40 @@ import static com.ohgiraffers.common.Template.getSqlSession;
 
 public class ProductService {
 
-    private ProductMapper productMapper;
+    private ProductMapper mapper;
 
     public List<ProductDTO> selectAllProducts() {
 
         SqlSession sqlSession = getSqlSession();
-        productMapper = sqlSession.getMapper(ProductMapper.class);
+        mapper = sqlSession.getMapper(ProductMapper.class);
 
-        List<ProductDTO> productList = productMapper.selectAllProduct();
+        List<ProductDTO> productList = mapper.selectAllProduct();
+
+        for(ProductDTO productDTO : productList){
+            System.out.println(productDTO);
+        }
 
         sqlSession.close();
-
         return productList;
     }
+
+    public boolean deleteProduct(int code){
+
+        SqlSession sqlSession = getSqlSession();
+        mapper = sqlSession.getMapper(ProductMapper.class);
+
+        int result = mapper.deleteProduct(code);
+
+        if(result > 0){
+            sqlSession.commit();
+        } else {
+            sqlSession.rollback();
+        }
+
+        sqlSession.close();
+        return result > 0 ? true : false;
+    }
+
+
 
 }

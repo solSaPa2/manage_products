@@ -10,10 +10,9 @@ import lombok.*;
 
 public class ProductDTO {
 
-    private int productCode;
-    private String productName;
-    private int categoryCode;
-    private int productQuantity;
-    private String productDetail;
+    private int product_code;
+    private String product_name;
+    private int category_code;
+    private int product_quantity;
+    private String product_detail;
 }
-

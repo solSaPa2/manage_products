@@ -1,10 +1,10 @@
 package com.ohgiraffers.controller;
 
-import com.ohgiraffers.dto.CategoryDTO;
 import com.ohgiraffers.dto.ProductDTO;
 import com.ohgiraffers.service.ProductService;
 
 import java.util.List;
+import java.util.Map;
 
 public class ProductController {
 
@@ -27,5 +27,16 @@ public class ProductController {
         }
     }
 
+
+    public void deleteProduct(Map<String,String> parameter) {
+
+        int code = Integer.parseInt(parameter.get("code"));
+
+        if(productService.deleteProduct(code)){
+            System.out.println("삭제 성공");
+        }else{
+            System.out.println("삭제 실패");
+        }
+    }
 
 }
