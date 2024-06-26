@@ -3,5 +3,41 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.ohgiraffers.dao.CategoryMapper">
+    <resultMap id="categoryResultMap" type="com.ohgiraffers.dto.CategoryDTO">
+        <id property="categoryCode" column="category_code"/>
+        <result property="categoryName" column="category_name"/>
+    </resultMap>
 
+    <insert id="insertCategory" parameterType="com.ohgiraffers.dto.CategoryDTO">
+        insert into category (
+        category_name
+        ) values (
+        #{ categoryName }
+        )
+
+    </insert>
+
+    <select id="selectAllCategory" resultMap="categoryResultMap">
+        select
+        category_code,
+        category_name
+        from category
+        order by category_code
+    </select>
+    
+    <update id="updateCategory" parameterType="com.ohgiraffers.dto.CategoryDTO">
+        update
+        category
+        set
+        category_name = #{ categoryName }
+        where
+        category_code = #{ categoryCode }
+    </update>
+    
+    
+    <delete id="deleteCategory" parameterType="_int">
+        delete
+        from category
+        where category_code = #{ categoryCode }
+    </delete>
 </mapper>
