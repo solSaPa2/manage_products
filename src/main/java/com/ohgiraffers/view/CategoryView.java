@@ -23,7 +23,7 @@ public class CategoryView {
                 case 1: categoryController.insertCategory(inputInsertCategory()); break;
 //                case 2: categoryController.updateCategory(); break;
 //                case 3: categoryController.deleteCategory(); break;
-//                case 4: categoryController.selectAllCategory(); break;
+                case 4: categoryController.selectAllCategory(); break;
 //                case 5: categoryController.selectProductByCategoryCode(); break;
                 case 0: return;
             }
@@ -44,6 +44,8 @@ public class CategoryView {
 
         return parameter;
     }
+
+
 
 
 }

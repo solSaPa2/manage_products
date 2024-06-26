@@ -16,4 +16,12 @@
         )
 
     </select>
+
+    <select id="selectAllCategory" resultMap="categoryResultMap">
+        select
+        category_code,
+        category_name
+        from category
+        order by category_code
+    </select>
 </mapper>
