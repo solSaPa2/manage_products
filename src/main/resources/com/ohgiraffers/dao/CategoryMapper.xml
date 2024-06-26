@@ -33,4 +33,11 @@
         where
         category_code = #{ categoryCode }
     </update>
+    
+    
+    <delete id="deleteCategory" parameterType="_int">
+        delete
+        from category
+        where category_code = #{ categoryCode }
+    </delete>
 </mapper>
