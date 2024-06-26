@@ -22,4 +22,77 @@ public class MemberService {
 
         return member;
     }
+
+    public int insertMember(Map<String, String> map) {
+        SqlSession sqlSession = getSqlSession();
+        mapper = sqlSession.getMapper(MemberMapper.class);
+
+        int result = mapper.insertMember(map);
+
+        if (result > 0){
+            sqlSession.commit();
+        } else {
+            sqlSession.rollback();
+        }
+
+        sqlSession.close();
+
+        return result;
+    }
+
+    public MemberDTO selectExistingId(String memberId) {
+        SqlSession sqlSession = getSqlSession();
+        mapper = sqlSession.getMapper(MemberMapper.class);
+
+        MemberDTO member = mapper.selectExistingId(memberId);
+
+        sqlSession.close();
+
+        return member;
+    }
+
+    public MemberDTO selectMember(String memberId) {
+        SqlSession sqlSession = getSqlSession();
+        mapper = sqlSession.getMapper(MemberMapper.class);
+
+        MemberDTO member = mapper.selectExistingId(memberId);
+
+        sqlSession.close();
+
+        return member;
+    }
+
+    public int updateMember(Map<String, String> memberInfo) {
+        SqlSession sqlSession = getSqlSession();
+        mapper = sqlSession.getMapper(MemberMapper.class);
+
+        int result = mapper.updateMember(memberInfo);
+
+        if (result > 0){
+            sqlSession.commit();
+        } else {
+            sqlSession.rollback();
+        }
+
+        sqlSession.close();
+
+        return result;
+    }
+
+    public int deleteMember(String memberId) {
+        SqlSession sqlSession = getSqlSession();
+        mapper = sqlSession.getMapper(MemberMapper.class);
+
+        int result = mapper.deleteMember(memberId);
+
+        if (result > 0){
+            sqlSession.commit();
+        } else {
+            sqlSession.rollback();
+        }
+
+        sqlSession.close();
+
+        return result;
+    }
 }

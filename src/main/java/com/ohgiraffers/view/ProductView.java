@@ -2,6 +2,8 @@ package com.ohgiraffers.view;
 
 import com.ohgiraffers.controller.ProductController;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Scanner;
 
 public class ProductView {
@@ -20,12 +22,24 @@ public class ProductView {
             switch (no){
 //                case 1: productController.insertProduct(); break;
 //                case 2: productController.updateProduct(); break;
-//                case 3: productController.deleteProduct(); break;
-//                case 4: productController.selectAllProducts(); break;
+                case 3: productController.deleteProduct(inputMenuCode()); break;
+                case 4: productController.selectAllProducts(); break;
 //                case 5: productController.selectProductByCode(); break;
                 case 0: return;
             }
         } while (true);
+    }
+
+    private  static Map<String, String > inputMenuCode() {
+        Scanner sc = new Scanner(System.in);
+        System.out.print("상품 코드를 입력하세요 :");
+        String code = sc.nextLine();
+
+        Map<String, String> parameter = new HashMap<>();
+        parameter.put("code",code);
+
+        return parameter;
+
     }
 
 
