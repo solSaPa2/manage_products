@@ -63,4 +63,33 @@ public class MemberController {
             System.out.println("로그인 되어있지 않습니다. 로그인 후 다시 시도해주세요.");
         }
     }
+
+    public Map<String, String> updateMember(Map<String, String> memberInfo) {
+        String previousId = memberInfo.get("previousId");
+        String memberId = memberInfo.get("memberId");
+
+        MemberDTO member = null;
+        if (!previousId.equals(memberId)){
+            member = memberService.selectExistingId(memberId);
+        }
+
+        Map<String, String> loginInfo = new HashMap<>();
+        loginInfo.put("login","true");
+        loginInfo.put("memberId",previousId);
+
+        if (member == null){
+            int result = memberService.updateMember(memberInfo);
+
+            if (result > 0){
+                System.out.println("회원 정보 수정 성공!");
+                loginInfo.put("memberId",memberId);
+            } else {
+                System.out.println("회원 정보 수정 실패!");
+            }
+        } else{
+            System.out.println("이미 존재하는 id입니다.");
+        }
+
+        return loginInfo;
+    }
 }

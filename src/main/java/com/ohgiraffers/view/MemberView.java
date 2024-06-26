@@ -24,9 +24,9 @@ public class MemberView {
 
                 switch (no){
                     case 1: loginInfo = logout(loginInfo); break;
-//                    case 2: memberController.updateMember(); break;
+                    case 2: loginInfo = memberController.updateMember(updateMemberInfo(loginInfo)); break;
                     case 3: memberController.selectMember(loginInfo); break;
-//                    case 4: memberController.deleteMember(); break;
+//                    case 4: memberController.deleteMember(loginInfo); break;
                     case 0: flag = false; break;
                 }
             } else {
@@ -87,6 +87,34 @@ public class MemberView {
         String memberEmail = sc.nextLine();
 
         Map<String,String> map = new HashMap<>();
+        map.put("memberId",memberId);
+        map.put("memberPassword",memberPassword);
+        map.put("memberName",memberName);
+        map.put("memberPhoneNumber",memberPhoneNumber);
+        map.put("memberIdentityNumber",memberIdentityNumber);
+        map.put("memberEmail",memberEmail);
+
+        return map;
+    }
+
+    public Map<String, String> updateMemberInfo(Map<String,String> loginInfo){
+        Scanner sc = new Scanner(System.in);
+        System.out.print("id: ");
+        String memberId = sc.nextLine();
+        System.out.print("비밀번호: ");
+        String memberPassword = sc.nextLine();
+        System.out.print("이름: ");
+        String memberName = sc.nextLine();
+        System.out.print("전화번호: ");
+        String memberPhoneNumber = sc.nextLine();
+        System.out.print("주민등록번호: ");
+        String memberIdentityNumber = sc.nextLine();
+        System.out.print("이메일 주소: ");
+        String memberEmail = sc.nextLine();
+
+        Map<String,String> map = new HashMap<>();
+        map.put("previousId",loginInfo.get("memberId"));
+
         map.put("memberId",memberId);
         map.put("memberPassword",memberPassword);
         map.put("memberName",memberName);

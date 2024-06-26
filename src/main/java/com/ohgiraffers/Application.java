@@ -21,9 +21,13 @@ public class Application {
         CategoryView categoryView = new CategoryView();
 
         do{
-            System.out.println("\n===== 상품 관리 시스템 =====");
-            System.out.println("1. 로그인 / 회원등록 / 회원 탈퇴\n" +
-                    "2. 상품 관리\n" +
+            System.out.println("\n============= 상품 관리 시스템 =============");
+            if (loginInfo.get("login").equals("false")){
+                System.out.println("1. 로그인 / 회원등록");
+            } else if(loginInfo.get("login").equals("true")){
+                System.out.println("1. 로그아웃 / 회원탈퇴 / 회원정보 수정 / 내 정보 조회");
+            }
+            System.out.println("2. 상품 관리\n" +
                     "3. 카테고리 관리\n" +
                     "0. 프로그램 종료\n" +
                     "-----------------------------");

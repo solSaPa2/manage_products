@@ -10,4 +10,6 @@ public interface MemberMapper {
     int insertMember(Map<String, String> map);
 
     MemberDTO selectExistingId(String memberId);
+
+    int updateMember(Map<String, String> memberInfo);
 }
