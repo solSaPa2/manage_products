@@ -26,7 +26,7 @@ public class MemberView {
                     case 1: loginInfo = logout(loginInfo); break;
                     case 2: loginInfo = memberController.updateMember(updateMemberInfo(loginInfo)); break;
                     case 3: memberController.selectMember(loginInfo); break;
-//                    case 4: memberController.deleteMember(loginInfo); break;
+                    case 4: loginInfo = memberController.deleteMember(loginInfo); break;
                     case 0: flag = false; break;
                 }
             } else {
@@ -124,6 +124,4 @@ public class MemberView {
 
         return map;
     }
-
-
 }
