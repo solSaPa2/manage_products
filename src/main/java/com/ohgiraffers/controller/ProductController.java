@@ -1,10 +1,7 @@
 package com.ohgiraffers.controller;
-
-import com.ohgiraffers.dto.CategoryDTO;
-import com.ohgiraffers.dto.ProductDTO;
 import com.ohgiraffers.service.ProductService;
 
-import java.util.List;
+import java.util.Map;
 
 public class ProductController {
 
@@ -14,18 +11,22 @@ public class ProductController {
         productService = new ProductService();
     }
 
-    public void selectAllProducts(){
+    public void insertProduct(Map<String, String> parameter) {
 
-        List<ProductDTO> productList = productService.selectAllProducts();
+        int code =
+        String name = parameter.get("name");
+        int price = Integer.parseInt(parameter.get("price"));
+        int categoryCode = Integer.parseInt(parameter.get("categoryCode"));
 
-        if(productList != null){
-            for(ProductDTO product : productList) {
-                System.out.println(product);
-            }
-        }else{
-            System.out.println("결과 출력 실패!!!");
+        MenuDTO menu = new MenuDTO();
+        menu.setName(name);
+        menu.setPrice(price);
+        menu.setCategoryCode(categoryCode);
+
+        if(menuService.registMenu(menu)) {
+            printResult.printSuccessMessage("insert");
+        } else {
+            printResult.printErrorMessage("insert");
         }
     }
-
-
 }
