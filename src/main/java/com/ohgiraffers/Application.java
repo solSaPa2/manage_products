@@ -3,12 +3,17 @@ package com.ohgiraffers;
 import com.ohgiraffers.view.MemberView;
 import com.ohgiraffers.view.ProductView;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Scanner;
 
 public class Application {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         boolean flag = true;
+        Map<String, String> loginInfo = new HashMap<>();
+        loginInfo.put("login","false");
+        loginInfo.put("memberId","");
 
         MemberView memberView = new MemberView();
         ProductView productView = new ProductView();
@@ -25,7 +30,7 @@ public class Application {
             int no = sc.nextInt();
 
             switch (no){
-                case 1: memberView.memberSubMenu(); break;
+                case 1: loginInfo = memberView.memberSubMenu(loginInfo); break;
                 case 2: productView.productSubMenu(); break;
               //  case 3: categoryView.categorySubMenu(); break;
                 case 0: flag = false; break;

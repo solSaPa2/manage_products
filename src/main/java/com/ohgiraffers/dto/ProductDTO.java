@@ -16,3 +16,4 @@ public class ProductDTO {
     private int productQuantity;
     private String productDetail;
 }
+

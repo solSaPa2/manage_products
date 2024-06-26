@@ -8,14 +8,14 @@
         <result property="categoryName" column="category_name"/>
     </resultMap>
 
-    <select id="insertCategory" resultMap="categoryResultMap">
+    <insert id="insertCategory" parameterType="com.ohgiraffers.dto.CategoryDTO">
         insert into category (
         category_name
         ) values (
         #{ categoryName }
         )
 
-    </select>
+    </insert>
 
     <select id="selectAllCategory" resultMap="categoryResultMap">
         select
@@ -24,4 +24,20 @@
         from category
         order by category_code
     </select>
+    
+    <update id="updateCategory" parameterType="com.ohgiraffers.dto.CategoryDTO">
+        update
+        category
+        set
+        category_name = #{ categoryName }
+        where
+        category_code = #{ categoryCode }
+    </update>
+    
+    
+    <delete id="deleteCategory" parameterType="_int">
+        delete
+        from category
+        where category_code = #{ categoryCode }
+    </delete>
 </mapper>

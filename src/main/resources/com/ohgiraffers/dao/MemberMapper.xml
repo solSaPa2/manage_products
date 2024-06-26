@@ -3,5 +3,30 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.ohgiraffers.dao.MemberMapper">
+    <resultMap id="memberResultMap" type="com.ohgiraffers.dto.MemberDTO">
+        <id property="memberId" column="member_id"/>
+        <result property="memberPassword" column="member_password"/>
+        <result property="memberName" column="member_name"/>
+        <result property="memberPhoneNumber" column="member_phone_number"/>
+        <result property="memberIdentityNumber" column="member_identity_number"/>
+        <result property="memberRegisteredDate" column="member_registered_date"/>
+        <result property="memberEmail" column="member_email"/>
+    </resultMap>
 
+    <select id="selectLoginInfo" parameterType="hashmap" resultMap="memberResultMap">
+        SELECT *
+        FROM member
+        WHERE member_id LIKE #{memberId} AND member_password LIKE #{memberPassword}
+    </select>
+
+    <insert id="insertMember" parameterType="hashmap">
+        INSERT INTO member (member_id, member_password, member_name, member_phone_number, member_identity_number, member_registered_date, member_email)
+        VALUES (#{memberId}, #{memberPassword}, #{memberName}, #{memberPhoneNumber}, #{memberIdentityNumber}, current_timestamp(), #{memberEmail})
+    </insert>
+
+    <select id="selectExistingId" parameterType="string" resultMap="memberResultMap">
+        SELECT *
+        FROM member
+        WHERE member_id LIKE #{memberId}
+    </select>
 </mapper>
