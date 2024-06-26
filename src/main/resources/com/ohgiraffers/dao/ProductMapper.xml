@@ -3,5 +3,23 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.ohgiraffers.dao.ProductMapper">
+    <resultMap id="productResultMap1" type="com.ohgiraffers.dao.ProductMapper">
+        <id property="product_code" column="product_code"/>
+        <result property="product_name" column="name"/>
+        <result property="category_code" column="category_code"/>
+        <result property="product_quantity" column="quantity"/>
+        <result property="product_detail" column="detail"/>
+    </resultMap>
+
+   <select id="selectAllProducts" resultMap="productResultMap1">
+        select
+        product_code,
+        name,
+        category_code,
+        quantity,
+        detail
+        from product_db
+   </select>
+
 
 </mapper>
