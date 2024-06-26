@@ -13,8 +13,6 @@ public class MemberController {
     }
 
     public boolean selectLoginInfo(Map<String, String> map) {
-//        String memberId = map.get("memberId");
-//        String memberPassword = map.get("memberPassword");
         MemberDTO member = memberService.selectLoginInfo(map);
 
         if (member != null){
@@ -23,6 +21,23 @@ public class MemberController {
         } else {
             System.out.println("로그인 실패!");
             return false;
+        }
+    }
+
+    public void insertMember(Map<String, String> map) {
+        String memberId = map.get("memberId");
+        MemberDTO member = memberService.selectExistingId(memberId);
+
+        if (member == null){
+            int result = memberService.insertMember(map);
+
+            if (result > 0){
+                System.out.println("회원 등록 성공!");
+            } else {
+                System.out.println("회원 등록 실패!");
+            }
+        } else{
+            System.out.println("이미 존재하는 id입니다.");
         }
     }
 }
