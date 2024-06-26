@@ -92,4 +92,18 @@ public class MemberController {
 
         return loginInfo;
     }
+
+    public Map<String, String> deleteMember(Map<String, String> loginInfo) {
+        int result = memberService.deleteMember(loginInfo.get("memberId"));
+
+        if (result > 0){
+            System.out.println("회원 탈퇴 성공!");
+            loginInfo.put("login","false");
+            loginInfo.put("memberId","");
+        } else {
+            System.out.println("회원 탈퇴 실패!");
+        }
+
+        return loginInfo;
+    }
 }
