@@ -10,4 +10,6 @@ public interface ProductMapper {
 
     int deleteProduct(int code);
 
+    int updateProduct(ProductDTO product);
+
 }

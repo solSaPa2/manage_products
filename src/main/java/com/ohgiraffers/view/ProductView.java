@@ -21,7 +21,7 @@ public class ProductView {
 
             switch (no){
 //                case 1: productController.insertProduct(); break;
-//                case 2: productController.updateProduct(); break;
+                case 2: productController.updateProduct(inputModifyMenu()); break;
                 case 3: productController.deleteProduct(inputMenuCode()); break;
                 case 4: productController.selectAllProducts(); break;
 //                case 5: productController.selectProductByCode(); break;
@@ -42,5 +42,27 @@ public class ProductView {
 
     }
 
+    private static Map<String, String> inputModifyMenu(){
+        Scanner sc = new Scanner(System.in);
 
+        System.out.print("수정할 상품 코드를 입력하세요 :");
+        String productCode = sc.nextLine();
+        System.out.print("수정할 상품 이름을 입력하세요 : ");
+        String productName = sc.nextLine();
+        System.out.print("수정할 카테고리 코드를 입력하세요 : ");
+        String categoryCode = sc.nextLine();
+        System.out.print("수정할 상품 수량을 입력하세요 : ");
+        String productQuantity = sc.nextLine();
+        System.out.print("수정할 상품 세부사항을 작성하세요 : ");
+        String productDetail = sc.nextLine();
+
+        Map<String, String> parameter = new HashMap<>();
+        parameter.put("productCode",productCode);
+        parameter.put("productName",productName);
+        parameter.put("categoryCode",categoryCode);
+        parameter.put("productQuantity",productQuantity);
+        parameter.put("productDetail", productDetail);
+        return parameter;
+
+    }
 }
