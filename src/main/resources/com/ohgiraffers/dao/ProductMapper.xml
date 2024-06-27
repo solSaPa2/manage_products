@@ -10,6 +10,8 @@
         <result property="categoryCode" column="category_code"/>
         <result property="productQuantity" column="product_quantity"/>
         <result property="productDetail" column="product_detail"/>
+        <result property="productPrice" column="product_price"/>
+        <result property="sellerId" column="seller_id"/>
     </resultMap>
 
     <insert id="insertProduct" parameterType="com.ohgiraffers.dto.ProductDTO">

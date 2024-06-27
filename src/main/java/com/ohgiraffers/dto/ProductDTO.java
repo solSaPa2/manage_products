@@ -7,12 +7,12 @@ import lombok.*;
 @Getter
 @Setter
 @ToString
-
 public class ProductDTO {
-
     private int productCode;
     private String productName;
     private int categoryCode;
     private int productQuantity;
     private String productDetail;
+    private int productPrice;
+    private String sellerId;
 }
