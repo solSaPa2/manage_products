@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ohgiraffers.dao.ReviewMapper">
+    <resultMap id="ReviewResultMap" type="com.ohgiraffers.dto.ReviewDTO">
+        <id property="reviewId" column="review_id"/>
+        <result property="ratings" column="ratings"/>
+        <result property="orderId" column="order_id"/>
+        <result property="reviewDetail" column="review_detail"/>
+        <result property="productCode" column="product_code"/>
+    </resultMap>
+
+    <insert id="insertReview" parameterType="com.ohgiraffers.dto.ReviewDTO">
+        insert into review(
+        ratings,
+        order_id,
+        review_detail,
+        product_code
+        )values(
+        #{ ratings },
+        #{ orderId },
+        #{ reviewDetail },
+        #{ productCode }
+        )
+    </insert>
+
+    <update id="updateReview" parameterType="com.ohgiraffers.dto.ReviewDTO">
+        update
+        review
+        set
+        ratings = #{ ratings },
+        review_detail = #{ reviewDetail }
+        where
+        review_id = #{ reviewId }
+    </update>
+</mapper>

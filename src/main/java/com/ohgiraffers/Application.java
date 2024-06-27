@@ -3,6 +3,7 @@ package com.ohgiraffers;
 import com.ohgiraffers.view.CategoryView;
 import com.ohgiraffers.view.MemberView;
 import com.ohgiraffers.view.ProductView;
+import com.ohgiraffers.view.ReviewView;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -31,7 +32,7 @@ public class Application {
                     "3. 카테고리 관리\n" +
                     "0. 프로그램 종료\n" +
                     "------------------------------------------------");
-            System.out.print("번호 입력: ");
+            System.out.print("번호 입력 : ");
             int no = sc.nextInt();
 
             switch (no){

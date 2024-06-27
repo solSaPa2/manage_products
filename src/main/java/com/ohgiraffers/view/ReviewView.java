@@ -2,6 +2,8 @@ package com.ohgiraffers.view;
 
 import com.ohgiraffers.controller.ReviewController;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Scanner;
 
 public class ReviewView {
@@ -19,8 +21,8 @@ public class ReviewView {
             sc.nextLine();
 
             switch (no){
-//                case 1: reviewController.insertReview(); break;
-//                case 2: reviewController.updateReview(); break;
+                  case 1: reviewController.insertReview(inputMenu()); break;
+                  case 2: reviewController.updateReview(inputUpdateReview()); break;
 //                case 3: reviewController.deleteReview(); break;
 //                case 4: reviewController.selectMyReviews(); break;
 //                case 5: reviewController.selectAllReviewsByProductCode(); break;
@@ -28,4 +30,48 @@ public class ReviewView {
             }
         } while (true);
     }
+
+    private  static Map<String, String > inputMenu() {
+        Scanner sc = new Scanner(System.in);
+
+        System.out.print("추가할 별점을 입력하세요 : ");
+        String ratings = sc.nextLine();
+        System.out.print("추가할 구매자 아이디를 입력해주세요 : ");
+        String orderId = sc.nextLine();
+        System.out.print("추가할 세부사항을 입력해주세요 : ");
+        String reviewDetail = sc.nextLine();
+        System.out.print("추가할 상품 코드를 입력해주세요 : ");
+        String productCode = sc.nextLine();
+
+        Map<String, String> parameter = new HashMap<>();
+        parameter.put("ratings",ratings);
+        parameter.put("reviewDetail",reviewDetail);
+        parameter.put("productCode", productCode);
+        parameter.put("oderId",orderId);
+        return parameter;
+
+    }
+
+    private static Map<String, String> inputUpdateReview() {
+
+        Scanner sc = new Scanner(System.in);
+
+        System.out.print("어떤 리뷰를 수정할지 번호를 입력하세요 : ");
+        int reviewId = sc.nextInt();
+
+        System.out.print("수정할 리뷰별점을 입력하세요 : ");
+        double ratings = sc.nextDouble();
+
+        System.out.print("수정할 리뷰 내용을 입력하세요 : ");
+        String reviewDetail = sc.nextLine();
+
+        Map<String, String> parameter = new HashMap<>();
+
+        parameter.put("reviewId", String.valueOf(reviewId));
+        parameter.put("ratings", String.valueOf(ratings));
+        parameter.put("reviewDetail",reviewDetail);
+
+        return parameter;
+    }
+
 }
