@@ -12,17 +12,24 @@
         <result property="productDetail" column="product_detail"/>
     </resultMap>
 
-   <select id="selectAllProduct" resultMap="productResultMap">
-        select
+    <insert id="insertProduct" parameterType="com.ohgiraffers.dto.ProductDTO">
+        insert into product(
         product_code,
         product_name,
         category_code,
         product_quantity,
         product_detail
-        from product
-   </select>
+        )values(
+        #{ productCode },
+        #{ productName },
+        #{ categoryCode },
+        #{ productQuantity },
+        #{ productDetail }
+        )
+    </insert>
 
-    <delete id="deleteProduct" parameterType="_int">
+
+    <delete id="deleteProduct" parameterType="com.ohgiraffers.dto.ProductDTO">
         delete
         from product
         where product_code = #{ productCode }
@@ -39,23 +46,6 @@
         where product_code = #{ productCode }
     </update>
 
-    <delete id="deleteProduct" parameterType="_int">
-        delete
-        from product
-        where product_code = #{ productCode }
-    </delete>
-
-    <update id="updateProduct" parameterType="com.ohgiraffers.dto.ProductDTO">
-        update product
-        set
-        product_code = #{ productCode },
-        product_name = #{ productName },
-        category_code = #{ categoryCode },
-        product_quantity = #{ productQuantity },
-        product_detail = #{ productDetail }
-        where
-        product_code = #{ productCode }
-    </update>
 
     <select id="selectAllProduct" resultMap="productResultMap">
         select
