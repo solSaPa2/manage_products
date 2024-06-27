@@ -15,15 +15,18 @@ public class ReviewController {
 
     public void insertReview(Map<String, String> parameter) {
 
+
         double ratings= Double.parseDouble(parameter.get("ratings"));
         String reviewDetail = parameter.get("reviewDetail");
         int productCode = Integer.parseInt(parameter.get("productCode"));
+        int orderId = Integer.parseInt(parameter.get("orderId"));
 
         ReviewDTO review = new ReviewDTO();
 
 
         review.setRatings(ratings);
         review.setReviewDetail(reviewDetail);
+        review.setOrderId(orderId);
         review.setProductCode(productCode);
 
         if(reviewService.insertReview(review)) {
