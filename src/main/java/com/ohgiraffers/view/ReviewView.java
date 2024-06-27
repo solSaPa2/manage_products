@@ -2,6 +2,8 @@ package com.ohgiraffers.view;
 
 import com.ohgiraffers.controller.ReviewController;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Scanner;
 
 public class ReviewView {
@@ -20,12 +22,34 @@ public class ReviewView {
 
             switch (no){
 //                case 1: reviewController.insertReview(); break;
-//                case 2: reviewController.updateReview(); break;
+                case 2: reviewController.updateReview(inputUpdateReview()); break;
 //                case 3: reviewController.deleteReview(); break;
 //                case 4: reviewController.selectMyReviews(); break;
 //                case 5: reviewController.selectAllReviewsByProductCode(); break;
                 case 0: return;
             }
         } while (true);
+    }
+
+    private static Map<String, String> inputUpdateReview() {
+
+        Scanner sc = new Scanner(System.in);
+
+        System.out.print("어떤 리뷰를 수정할지 번호를 입력하세요 : ");
+        int reviewId = sc.nextInt();
+
+        System.out.print("수정할 리뷰별점을 입력하세요 : ");
+        double rating = sc.nextDouble();
+
+        System.out.print("수정할 리뷰 내용을 입력하세요 : ");
+        String reviewDetail = sc.nextLine();
+
+        Map<String, String> parameter = new HashMap<>();
+
+        parameter.put("reviewId", String.valueOf(reviewId));
+        parameter.put("rating", String.valueOf(rating));
+        parameter.put("reviewDetail",reviewDetail);
+
+        return parameter;
     }
 }
