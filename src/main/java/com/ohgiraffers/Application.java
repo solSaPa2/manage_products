@@ -16,7 +16,6 @@ public class Application {
         Map<String, String> loginInfo = new HashMap<>();
         loginInfo.put("login","false");
         loginInfo.put("memberId","");
-        loginInfo.put("memberType","");
 
         MemberView memberView = new MemberView();
         ProductView productView = new ProductView();
@@ -43,7 +42,6 @@ public class Application {
                     "3. 카테고리 관리\n" +
                     "4. 리뷰 관리\n" + // 임시
                     "0. 프로그램 종료\n" +
-            System.out.println("0. 프로그램 종료\n" +
                     "------------------------------------------------");
             System.out.print("번호 입력 : ");
             int no = sc.nextInt();
@@ -53,7 +51,6 @@ public class Application {
                 case 2: productView.productSubMenu(); break;
                 case 3: categoryView.categorySubMenu(); break;
                 case 4: reviewView.reviewSubMenu(); break; // 임시
-                case 9: categoryView.categorySubMenu(); break;
                 case 0: flag = false; break;
                 default: System.out.println("잘못된 메뉴를 선택하셨습니다."); break;
             }
