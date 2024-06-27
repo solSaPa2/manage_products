@@ -75,4 +75,17 @@ public class ProductService {
         sqlSession.close();
         return productList;
     }
+
+    public ProductDTO selectProductByCode(int code) {
+
+        SqlSession sqlSession = getSqlSession();
+
+        mapper = sqlSession.getMapper(ProductMapper.class);
+
+        ProductDTO productDTO = mapper.selectProductByCode(code);
+
+        sqlSession.close();
+
+        return productDTO;
+    }
 }
