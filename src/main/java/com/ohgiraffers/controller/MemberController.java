@@ -22,11 +22,21 @@ public class MemberController {
             System.out.println("로그인 성공!");
             loginInfo.put("login","true");
             loginInfo.put("memberId",map.get("memberId"));
+
+            if (memberService.selectSeller(map.get("memberId"))) {
+                loginInfo.put("memberType", "seller");
+            } else if(memberService.selectAdministrator(map.get("memberId"))){
+                loginInfo.put("memberType", "administrator");
+            } else{
+                loginInfo.put("memberType", "member");
+            }
+
             return loginInfo;
         } else {
             System.out.println("로그인 실패!");
             loginInfo.put("login","false");
             loginInfo.put("memberId","");
+            loginInfo.put("memberType","");
             return loginInfo;
         }
     }
@@ -66,7 +76,7 @@ public class MemberController {
                     int result = memberService.insertMember(map);
 
                     if (result > 0){
-                        result = memberService.insertAdministrator(memberId);
+                        result = memberService.insertAdministrator(map);
 
                         if (result > 0){
                             System.out.println("관리자 등록 성공!");
