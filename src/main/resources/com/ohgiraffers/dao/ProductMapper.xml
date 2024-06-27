@@ -42,6 +42,8 @@
         category_code = #{ categoryCode },
         product_quantity = #{ productQuantity },
         product_detail = #{ productDetail }
+        where
+        product_code = #{ productCode }
     </update>
 
     <select id="selectAllProduct" resultMap="productResultMap">
