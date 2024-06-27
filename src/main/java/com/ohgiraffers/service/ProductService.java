@@ -4,54 +4,22 @@ import com.ohgiraffers.dao.ProductMapper;
 import com.ohgiraffers.dto.ProductDTO;
 import org.apache.ibatis.session.SqlSession;
 
-import java.util.List;
-
 import static com.ohgiraffers.common.Template.getSqlSession;
 
 public class ProductService {
 
     private ProductMapper mapper;
 
-    public List<ProductDTO> selectAllProducts() {
+    public boolean insertProduct(ProductDTO productDTO) {
 
         SqlSession sqlSession = getSqlSession();
         mapper = sqlSession.getMapper(ProductMapper.class);
 
-        List<ProductDTO> productList = mapper.selectAllProduct();
+        int result = mapper.insertProduct(productDTO);
 
-        sqlSession.close();
-        return productList;
-    }
-
-    public boolean deleteProduct(int code){
-
-        SqlSession sqlSession = getSqlSession();
-        mapper = sqlSession.getMapper(ProductMapper.class);
-
-        int result = mapper.deleteProduct(code);
-
-        if(result > 0){
+        if(result >0 ){
             sqlSession.commit();
-        } else {
-            sqlSession.rollback();
-        }
-
-        sqlSession.close();
-        return result > 0 ? true : false;
-    }
-
-
-    public boolean updateProduct(ProductDTO productDTO) {
-
-        SqlSession sqlSession = getSqlSession();
-
-        mapper = sqlSession.getMapper(ProductMapper.class);
-
-        int result = mapper.updateProduct(productDTO);
-
-        if(result > 0){
-            sqlSession.commit();
-        } else {
+        } else{
             sqlSession.rollback();
         }
 
