@@ -15,6 +15,7 @@ public class ReviewService {
         SqlSession sqlSession = getSqlSession();
         Mapper = sqlSession.getMapper(ReviewMapper.class);
 
+        System.out.println(reviewDTO);
         int result =Mapper.insertReview(reviewDTO);
 
         if(result >0 ){

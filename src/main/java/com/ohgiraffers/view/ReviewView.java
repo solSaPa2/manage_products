@@ -47,7 +47,7 @@ public class ReviewView {
         parameter.put("ratings",ratings);
         parameter.put("reviewDetail",reviewDetail);
         parameter.put("productCode", productCode);
-        parameter.put("oderId",orderId);
+        parameter.put("orderId",orderId);
         return parameter;
 
     }

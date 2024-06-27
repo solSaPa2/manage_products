@@ -20,6 +20,7 @@ public class Application {
         MemberView memberView = new MemberView();
         ProductView productView = new ProductView();
         CategoryView categoryView = new CategoryView();
+        ReviewView reviewView = new ReviewView(); // 추가한거
 
         do{
             System.out.println("\n================ 상품 관리 시스템 ================");
@@ -30,6 +31,7 @@ public class Application {
             }
             System.out.println("2. 상품 관리\n" +
                     "3. 카테고리 관리\n" +
+                    "4. 리뷰 관리\n" + // 임시
                     "0. 프로그램 종료\n" +
                     "------------------------------------------------");
             System.out.print("번호 입력 : ");
@@ -39,6 +41,7 @@ public class Application {
                 case 1: loginInfo = memberView.memberSubMenu(loginInfo); break;
                 case 2: productView.productSubMenu(); break;
                 case 3: categoryView.categorySubMenu(); break;
+                case 4: reviewView.reviewSubMenu(); break; // 임시
                 case 0: flag = false; break;
                 default: System.out.println("잘못된 메뉴를 선택하셨습니다."); break;
             }
