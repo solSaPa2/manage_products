@@ -14,10 +14,10 @@ public class MemberView {
         boolean flag = true;
 
         do {
-            System.out.println("\n========== 회원 메뉴 ==========");
+            System.out.println("\n=============== 회원 메뉴 ===============");
             if (loginInfo.get("login").equals("true")){
                 System.out.println("1. 로그아웃\n2. 회원 정보 수정\n3. 회원 정보 조회\n4. 회원 탈퇴\n0. 이전 메뉴로");
-                System.out.println("--------------------------------------------");
+                System.out.println("----------------------------------------");
                 System.out.print("번호 입력: ");
                 int no = sc.nextInt();
                 sc.nextLine();
@@ -31,7 +31,7 @@ public class MemberView {
                 }
             } else {
                 System.out.println("1. 로그인\n2. 회원 가입\n0. 이전 메뉴로");
-                System.out.println("--------------------------------------------");
+                System.out.println("----------------------------------------");
                 System.out.print("번호 입력: ");
                 int no = sc.nextInt();
                 sc.nextLine();
