@@ -95,4 +95,38 @@ public class MemberService {
 
         return result;
     }
+
+    public int insertSeller(String memberId) {
+        SqlSession sqlSession = getSqlSession();
+        mapper = sqlSession.getMapper(MemberMapper.class);
+
+        int result = mapper.insertSeller(memberId);
+
+        if (result > 0){
+            sqlSession.commit();
+        } else {
+            sqlSession.rollback();
+        }
+
+        sqlSession.close();
+
+        return result;
+    }
+
+    public int insertAdministrator(String memberId) {
+        SqlSession sqlSession = getSqlSession();
+        mapper = sqlSession.getMapper(MemberMapper.class);
+
+        int result = mapper.insertAdministrator(memberId);
+
+        if (result > 0){
+            sqlSession.commit();
+        } else {
+            sqlSession.rollback();
+        }
+
+        sqlSession.close();
+
+        return result;
+    }
 }

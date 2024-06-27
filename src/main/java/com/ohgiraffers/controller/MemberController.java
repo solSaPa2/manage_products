@@ -36,12 +36,49 @@ public class MemberController {
         MemberDTO member = memberService.selectExistingId(memberId);
 
         if (member == null){
-            int result = memberService.insertMember(map);
+            String memberType = map.get("memberType");
+            if (memberType.equals("1") || (memberType.contains("일반") && !memberType.contains("관리자") && !memberType.contains("판매"))){
+                int result = memberService.insertMember(map);
 
-            if (result > 0){
-                System.out.println("회원 등록 성공!");
-            } else {
-                System.out.println("회원 등록 실패!");
+                if (result > 0){
+                    System.out.println("회원 등록 성공!");
+                } else {
+                    System.out.println("회원 등록 실패!");
+                }
+            } else if (memberType.equals("2") || (!memberType.contains("일반") && !memberType.contains("관리자") && memberType.contains("판매"))) {
+                // 판매자로 등록
+                int result = memberService.insertMember(map);
+
+                if (result > 0){
+                    result = memberService.insertSeller(memberId);
+
+                    if (result > 0){
+                        System.out.println("판매자 등록 성공!");
+                    } else {
+                        System.out.println("판매자 등록 실패!");
+                    }
+                } else {
+                    System.out.println("회원 등록 실패!");
+                }
+            } else if(memberType.equals("3") || (!memberType.contains("일반") && memberType.contains("관리자") && !memberType.contains("판매"))){
+                // 관리자로 등록
+                if (map.get("adminPassword").equals("admin")){
+                    int result = memberService.insertMember(map);
+
+                    if (result > 0){
+                        result = memberService.insertAdministrator(memberId);
+
+                        if (result > 0){
+                            System.out.println("관리자 등록 성공!");
+                        } else {
+                            System.out.println("관리자 등록 실패!");
+                        }
+                    } else {
+                        System.out.println("회원 등록 실패!");
+                    }
+                } else {
+                    System.out.println("관리자 등록 실패! (관리자 비밀번호 오류)");
+                }
             }
         } else{
             System.out.println("이미 존재하는 id입니다.");

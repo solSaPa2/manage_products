@@ -86,13 +86,24 @@ public class MemberView {
         System.out.print("이메일 주소: ");
         String memberEmail = sc.nextLine();
 
+        System.out.print("회원 분류 (1. 일반 회원, 2. 판매자, 3. 관리자): ");
+        String memberType = sc.nextLine();
+
         Map<String,String> map = new HashMap<>();
+
+        if(memberType.equals("3") || (!memberType.contains("일반") && memberType.contains("관리자") && !memberType.contains("판매"))){
+            System.out.print("관리자 비밀번호 입력: ");
+            String adminPassword = sc.nextLine();
+            map.put("adminPassword",adminPassword);
+        }
+
         map.put("memberId",memberId);
         map.put("memberPassword",memberPassword);
         map.put("memberName",memberName);
         map.put("memberPhoneNumber",memberPhoneNumber);
         map.put("memberIdentityNumber",memberIdentityNumber);
         map.put("memberEmail",memberEmail);
+        map.put("memberType",memberType);
 
         return map;
     }

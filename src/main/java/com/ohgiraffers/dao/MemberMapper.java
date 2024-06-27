@@ -14,4 +14,8 @@ public interface MemberMapper {
     int updateMember(Map<String, String> memberInfo);
 
     int deleteMember(String memberId);
+
+    int insertSeller(String memberId);
+
+    int insertAdministrator(String memberId);
 }
