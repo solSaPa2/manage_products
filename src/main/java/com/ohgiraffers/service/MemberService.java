@@ -1,7 +1,9 @@
 package com.ohgiraffers.service;
 
 import com.ohgiraffers.dao.MemberMapper;
+import com.ohgiraffers.dto.AdministratorDTO;
 import com.ohgiraffers.dto.MemberDTO;
+import com.ohgiraffers.dto.SellerDTO;
 import org.apache.ibatis.session.SqlSession;
 
 import java.util.List;
@@ -113,11 +115,11 @@ public class MemberService {
         return result;
     }
 
-    public int insertAdministrator(String memberId) {
+    public int insertAdministrator(Map<String, String> map) {
         SqlSession sqlSession = getSqlSession();
         mapper = sqlSession.getMapper(MemberMapper.class);
 
-        int result = mapper.insertAdministrator(memberId);
+        int result = mapper.insertAdministrator(map);
 
         if (result > 0){
             sqlSession.commit();
@@ -128,5 +130,35 @@ public class MemberService {
         sqlSession.close();
 
         return result;
+    }
+
+    public boolean selectSeller(String memberId) {
+        SqlSession sqlSession = getSqlSession();
+        mapper = sqlSession.getMapper(MemberMapper.class);
+
+        SellerDTO seller = mapper.selectSeller(memberId);
+
+        sqlSession.close();
+
+        if (seller != null){
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public boolean selectAdministrator(String memberId) {
+        SqlSession sqlSession = getSqlSession();
+        mapper = sqlSession.getMapper(MemberMapper.class);
+
+        AdministratorDTO administrator = mapper.selectAdministrator(memberId);
+
+        sqlSession.close();
+
+        if (administrator != null){
+            return true;
+        } else {
+            return false;
+        }
     }
 }

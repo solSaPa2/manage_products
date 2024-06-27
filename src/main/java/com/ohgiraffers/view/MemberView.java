@@ -52,6 +52,7 @@ public class MemberView {
        if (loginInfo.get("login").equals("true")){
             loginInfo.put("login","false");
             loginInfo.put("memberId","");
+            loginInfo.put("memberType","");
             System.out.println("로그아웃 되었습니다.");
         }
         return loginInfo;
@@ -91,7 +92,13 @@ public class MemberView {
 
         Map<String,String> map = new HashMap<>();
 
+        String adminPosition= "";
+
         if(memberType.equals("3") || (!memberType.contains("일반") && memberType.contains("관리자") && !memberType.contains("판매"))){
+            System.out.print("관리자 직책: ");
+            adminPosition = sc.nextLine();
+            map.put("adminPosition",adminPosition);
+
             System.out.print("관리자 비밀번호 입력: ");
             String adminPassword = sc.nextLine();
             map.put("adminPassword",adminPassword);
