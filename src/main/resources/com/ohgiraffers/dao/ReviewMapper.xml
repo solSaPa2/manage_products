@@ -10,3 +10,15 @@
         <result property="reviewDetail" column="review_detail"/>
         <result property="productCode" column="product_code"/>
     </resultMap>
+
+    <update id="updateReview" parameterType="com.ohgiraffers.dto.ReviewDTO">
+        update
+        review
+        set
+        rating = #{ rating }
+        review_detail = #{ reviewDetail }
+        where
+        review_id = #{ reviewId }
+    </update>
+
+</mapper>
