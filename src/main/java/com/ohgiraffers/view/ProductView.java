@@ -42,6 +42,10 @@ public class ProductView {
         String productQuantity = sc.nextLine();
         System.out.print("추가할 상품 세부사항을 입력해주세요 : ");
         String productDetail = sc.nextLine();
+        System.out.print("추가할 상품 가격을 입력해주세요 : ");
+        String productPrice = sc.nextLine();
+        System.out.print("추가할 판매자 아이디를 입력해주세요 : ");
+        String sellerId = sc.nextLine();
 
 
         Map<String, String> parameter = new HashMap<>();
@@ -50,6 +54,8 @@ public class ProductView {
         parameter.put("categoryCode",categoryCode);
         parameter.put("productQuantity",productQuantity);
         parameter.put("productDetail", productDetail);
+        parameter.put("productPrice",productPrice);
+        parameter.put("sellerId", sellerId);
         return parameter;
 
     }
@@ -77,8 +83,12 @@ public class ProductView {
         String categoryCode = sc.nextLine();
         System.out.print("수정할 상품 수량을 입력하세요 : ");
         String productQuantity = sc.nextLine();
-        System.out.print("수정할 상품 세부사항을 작성하세요 : ");
+        System.out.print("수정할 상품 세부사항을 입력하세요 : ");
         String productDetail = sc.nextLine();
+        System.out.print("수정할 상품 가격을 입력해주세요 : ");
+        String productPrice = sc.nextLine();
+        System.out.print("수정할 판매자 아이디를 입력하세요");
+        String sellerId = sc.nextLine();
 
         Map<String, String> parameter = new HashMap<>();
         parameter.put("productCode",productCode);
@@ -86,6 +96,8 @@ public class ProductView {
         parameter.put("categoryCode",categoryCode);
         parameter.put("productQuantity",productQuantity);
         parameter.put("productDetail", productDetail);
+        parameter.put("prodcutPrice", productPrice);
+        parameter.put("sellerId", sellerId);
         return parameter;
 
     }
