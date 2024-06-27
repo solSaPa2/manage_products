@@ -1,18 +1,18 @@
 package com.ohgiraffers.dao;
 
-
 import com.ohgiraffers.dto.ProductDTO;
 
 import java.util.List;
 
 public interface ProductMapper {
 
-    List<ProductDTO> selectAllProduct();
+    int insertProduct(ProductDTO product);
 
     int deleteProduct(int code);
 
     int updateProduct(ProductDTO product);
 
-    int insertProduct(ProductDTO product);
+    List<ProductDTO> selectAllProduct();
 
+    ProductDTO selectProductByCode(int code);
 }

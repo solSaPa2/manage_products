@@ -85,4 +85,18 @@ public class ProductController {
             System.out.println("결과 출력 실패!!!");
         }
     }
+
+
+    public void selectProductByCode(Map<String, String> parameter) {
+
+        int code = Integer.parseInt(parameter.get("code"));
+
+        ProductDTO productDTO = productService.selectProductByCode(code);
+
+        if( productDTO != null) {
+            System.out.println(productDTO);
+        } else {
+            System.out.println("단일 조회 실패");
+        }
+    }
 }

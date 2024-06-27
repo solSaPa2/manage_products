@@ -56,4 +56,15 @@
         from product
     </select>
 
+    <select id="selectProductByCode" parameterType="_int" resultMap="productResultMap">
+        select
+        product_code,
+        product_name,
+        category_code,
+        product_quantity,
+        product_detail
+        from product
+        where product_code = #{ productCode }
+    </select>
+
 </mapper>
