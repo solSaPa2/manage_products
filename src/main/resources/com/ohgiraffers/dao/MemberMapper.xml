@@ -13,6 +13,15 @@
         <result property="memberEmail" column="member_email"/>
     </resultMap>
 
+    <resultMap id="sellerResultMap" type="com.ohgiraffers.dto.SellerDTO">
+        <id property="memberId" column="member_id"/>
+    </resultMap>
+
+    <resultMap id="administratorResultMap" type="com.ohgiraffers.dto.AdministratorDTO">
+        <id property="memberId" column="member_id"/>
+        <result property="position" column="position"/>
+    </resultMap>
+
     <select id="selectLoginInfo" parameterType="hashmap" resultMap="memberResultMap">
         SELECT *
         FROM member
@@ -46,4 +55,26 @@
         FROM member
         WHERE member_id = #{memberId}
     </delete>
+
+    <insert id="insertSeller" parameterType="string">
+        INSERT INTO seller (member_id)
+        VALUES (#{memberId})
+    </insert>
+
+    <insert id="insertAdministrator" parameterType="hashmap">
+        INSERT INTO administrator (member_id, position)
+        VALUES (#{memberId}, #{adminPosition})
+    </insert>
+
+    <select id="selectSeller" parameterType="string" resultMap="sellerResultMap">
+        SELECT *
+        FROM seller
+        WHERE member_id LIKE #{memberId}
+    </select>
+
+    <select id="selectAdministrator" parameterType="string" resultMap="administratorResultMap">
+        SELECT *
+        FROM administrator
+        WHERE member_id LIKE #{memberId}
+    </select>
 </mapper>
