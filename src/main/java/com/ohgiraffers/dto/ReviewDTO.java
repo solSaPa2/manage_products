@@ -14,4 +14,5 @@ public class ReviewDTO {
     private double ratings;
     private int orderId;
     private String reviewDetail;
+    private int productCode;
 }
