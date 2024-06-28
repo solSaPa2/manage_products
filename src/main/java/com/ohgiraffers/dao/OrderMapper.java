@@ -1,5 +1,6 @@
 package com.ohgiraffers.dao;
 
+import com.ohgiraffers.dto.OrderDetailDTO;
 import com.ohgiraffers.dto.OrdersOrderDetailDTO;
 
 import java.util.List;
@@ -19,4 +20,6 @@ public interface OrderMapper {
     int getProductPrice(Map<String, String> map);
 
     int updateOrderTotalPrice(Map<String, String> inputMap2);
+
+    List<OrderDetailDTO> selectOrderDetail(String orderId);
 }
