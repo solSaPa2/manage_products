@@ -1,8 +1,6 @@
 package com.ohgiraffers.service;
 
-import com.ohgiraffers.dao.ProductMapper;
 import com.ohgiraffers.dao.ReviewMapper;
-import com.ohgiraffers.dto.ProductDTO;
 import com.ohgiraffers.dto.ProductReviewDTO;
 import com.ohgiraffers.dto.ReviewDTO;
 import org.apache.ibatis.session.SqlSession;

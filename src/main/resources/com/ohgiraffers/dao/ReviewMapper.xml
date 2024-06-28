@@ -14,12 +14,10 @@
     <insert id="insertReview" parameterType="com.ohgiraffers.dto.ReviewDTO">
         insert into review(
         ratings,
-        order_id,
         review_detail,
         product_code
         )values(
         #{ ratings },
-        #{ orderId },
         #{ reviewDetail },
         #{ productCode }
         )
