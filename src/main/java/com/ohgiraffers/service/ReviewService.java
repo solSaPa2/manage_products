@@ -6,6 +6,7 @@ import com.ohgiraffers.dto.ProductReviewDTO;
 import com.ohgiraffers.dto.ReviewDTO;
 import org.apache.ibatis.session.SqlSession;
 
+import java.util.List;
 import java.util.Map;
 
 import static com.ohgiraffers.common.Template.getSqlSession;
@@ -93,5 +94,15 @@ public class ReviewService {
         sqlSession.close();
 
         return productReview;
+    }
+
+    public List<ReviewDTO> selectReviewByOrderId(Map<String, String> map) {
+        SqlSession sqlSession = getSqlSession();
+        mapper = sqlSession.getMapper(ReviewMapper.class);
+
+        List<ReviewDTO> reviewList = mapper.selectReviewByOrderId(map);
+
+        sqlSession.close();
+        return reviewList;
     }
 }

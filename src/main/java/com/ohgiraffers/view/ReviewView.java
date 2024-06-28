@@ -34,7 +34,7 @@ public class ReviewView {
                     reviewController.deleteReview(inputReviewId());
                     break;
                 case 4:
-                    reviewController.selectMyReviews(inputReviewId());
+                    reviewController.selectMyReviews(loginInfo);
                     break;
                 case 5:
                     reviewController.selectReviewByProductCode(inputProductCode());
