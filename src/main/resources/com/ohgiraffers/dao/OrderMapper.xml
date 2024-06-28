@@ -49,4 +49,23 @@
         WHERE member_id = #{memberId}
         ORDER BY a.order_id
     </select>
+
+    <update id="updateProductQuantity" parameterType="hashmap">
+        UPDATE product
+        SET product_quantity = (product_quantity - #{quantity})
+        WHERE product_code = #{productCode}
+            AND (product_quantity - #{quantity}) > 0
+    </update>
+
+    <select id="getProductPrice" parameterType="hashmap" resultType="_int">
+        SELECT product_price
+        FROM product
+        WHERE product_code = #{productCode}
+    </select>
+
+    <update id="updateOrderTotalPrice" parameterType="hashmap">
+        UPDATE orders
+        SET total_price = #{totalPrice}
+        WHERE order_id = #{orderId}
+    </update>
 </mapper>
