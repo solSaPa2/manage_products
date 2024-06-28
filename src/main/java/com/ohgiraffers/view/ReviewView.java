@@ -21,17 +21,17 @@ public class ReviewView {
             sc.nextLine();
 
             switch (no){
-                  case 1: reviewController.insertReview(inputMenu()); break;
+                  case 1: reviewController.insertReview(inputReview()); break;
                   case 2: reviewController.updateReview(inputUpdateReview()); break;
-                  case 3: reviewController.deleteReview(inputReviewId()); break;
-//                case 4: reviewController.selectMyReviews(); break;
-                  case 5: reviewController.selectReviewByProductCode(inputProductCode()); break;
+//                case 3: reviewController.deleteReview(); break;
+                  case 4: reviewController.selectMyReviews(inputReviewId()); break;
+//                case 5: reviewController.selectAllReviewsByProductCode(); break;
                 case 0: return;
             }
         } while (true);
     }
 
-    private  static Map<String, String > inputMenu() {
+    private  static Map<String, String > inputReview() {
         Scanner sc = new Scanner(System.in);
 
         System.out.print("추가할 별점을 입력하세요 : ");
@@ -74,29 +74,16 @@ public class ReviewView {
         return parameter;
     }
 
-    private static Map<String, String> inputReviewId() {
-
+    private  static Map<String, String > inputReviewId() {
         Scanner sc = new Scanner(System.in);
-        System.out.print("리뷰 번호를 입력하세요 : ");
-        String reviewId = sc.nextLine();
+        System.out.print("주문자 아이디를 입력하세요 : ");
+        String orderId = sc.nextLine();
 
         Map<String, String> parameter = new HashMap<>();
-        parameter.put("reviewId",reviewId);
+        parameter.put("orderId",orderId);
 
         return parameter;
+
     }
-
-    private static Map<String, String> inputProductCode() {
-
-        Scanner sc = new Scanner(System.in);
-        System.out.print("조회할 리뷰의 상품 번호를 입력하세요 : ");
-        String productCode = sc.nextLine();
-
-        Map<String, String> parameter = new HashMap<>();
-        parameter.put("productCode",productCode);
-
-        return parameter;
-    }
-
 
 }
