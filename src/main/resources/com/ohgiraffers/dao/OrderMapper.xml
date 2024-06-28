@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ohgiraffers.dao.OrderMapper">
+    <resultMap id="ordersResultMap" type="com.ohgiraffers.dto.OrdersDTO">
+        <id property="orderId" column="order_id"/>
+        <result property="orderTime" column="order_time"/>
+        <result property="totalPrice" column="total_price"/>
+        <result property="memberId" column="member_id"/>
+    </resultMap>
+
+    <resultMap id="orderDetailResultMap" type="com.ohgiraffers.dto.OrderDetailDTO">
+        <id property="orderId" column="order_id"/>
+        <id property="productCode" column="product_code"/>
+        <result property="quantity" column="quantity"/>
+    </resultMap>
+
+    <insert id="insertOrders" parameterType="hashmap">
+        INSERT INTO orders (order_time, member_id)
+        VALUES (current_timestamp(), #{memberId})
+    </insert>
+
+    <select id="selectLastOrderId" resultType="int">
+        SELECT LAST_INSERT_ID()
+    </select>
+
+    <insert id="insertOrderDetail" parameterType="hashmap">
+        INSERT INTO order_detail (order_id, product_code, quantity)
+        VALUES (#{orderId}, #{productCode}, #{quantity})
+    </insert>
+
+</mapper>
