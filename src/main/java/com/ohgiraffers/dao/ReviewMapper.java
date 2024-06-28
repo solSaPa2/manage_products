@@ -3,6 +3,7 @@ package com.ohgiraffers.dao;
 import com.ohgiraffers.dto.ProductReviewDTO;
 import com.ohgiraffers.dto.ReviewDTO;
 
+import java.util.List;
 import java.util.Map;
 
 public interface ReviewMapper {
@@ -17,5 +18,5 @@ public interface ReviewMapper {
 
     ProductReviewDTO selectReviewByProductCode(int productCode);
 
-
+    List<ReviewDTO> selectReviewByOrderId(Map<String, String> map);
 }

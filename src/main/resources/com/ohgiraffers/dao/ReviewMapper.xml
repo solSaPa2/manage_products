@@ -68,4 +68,9 @@
         where b.product_code = #{ productCode }
         order by a.product_code
     </select>
+
+    <select id="selectReviewByOrderId" resultMap="ReviewResultMap">
+        SELECT * FROM review
+        WHERE order_id = #{orderId}
+    </select>
 </mapper>
