@@ -1,5 +1,6 @@
 package com.ohgiraffers.dao;
 
+import com.ohgiraffers.dto.ProductReviewDTO;
 import com.ohgiraffers.dto.ReviewDTO;
 
 public interface ReviewMapper {
@@ -9,4 +10,7 @@ public interface ReviewMapper {
     int updateReview(ReviewDTO review);
 
     int deleteReview(int review);
+
+    ProductReviewDTO selectReviewByProductCode(int productCode);
+
 }

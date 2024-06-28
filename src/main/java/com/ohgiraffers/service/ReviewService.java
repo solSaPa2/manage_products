@@ -3,6 +3,8 @@ package com.ohgiraffers.service;
 import com.ohgiraffers.dao.CategoryMapper;
 import com.ohgiraffers.dao.ProductMapper;
 import com.ohgiraffers.dao.ReviewMapper;
+import com.ohgiraffers.dto.CategoryProductDTO;
+import com.ohgiraffers.dto.ProductReviewDTO;
 import com.ohgiraffers.dto.ReviewDTO;
 import org.apache.ibatis.session.SqlSession;
 
@@ -65,5 +67,18 @@ public class ReviewService {
         sqlSession.close();
 
         return result > 0 ? true : false;
+    }
+
+    public ProductReviewDTO selectReviewByProductCode(int productCode) {
+
+        SqlSession sqlSession = getSqlSession();
+
+        Mapper = sqlSession.getMapper(ReviewMapper.class);
+
+        ProductReviewDTO productReview = Mapper.selectReviewByProductCode(productCode);
+
+        sqlSession.close();
+
+        return productReview;
     }
 }
