@@ -1,6 +1,7 @@
 package com.ohgiraffers.service;
 
 import com.ohgiraffers.dao.OrderMapper;
+import com.ohgiraffers.dto.OrderDetailDTO;
 import com.ohgiraffers.dto.OrdersOrderDetailDTO;
 import org.apache.ibatis.session.SqlSession;
 
@@ -32,8 +33,16 @@ public class OrderService {
                 inputMap.put("productCode", map.get("productCode" + i));
                 inputMap.put("quantity", map.get("quantity" + i));
 
-                // product에서 주문한 quantity만큼 줄이기
-                result = mapper.updateProductQuantity(inputMap);
+                if (Integer.parseInt(inputMap.get("quantity")) <= 0){
+                    // 주문량에 음수나 0을 입력했을 때
+                    result = 0;
+                    System.out.println("주문 수량은 최소 1개 이상입니다.");
+                    break;
+                } else{
+                    // product에서 주문한 quantity만큼 줄이기
+                    result = mapper.updateProductQuantity(inputMap);
+                }
+
 
                 if (result > 0){
                     // product의 재고가 충분하면 주문 진행
@@ -76,5 +85,16 @@ public class OrderService {
         sqlSession.close();
 
         return ordersList;
+    }
+
+    public List<OrderDetailDTO> selectOrderDetail(String orderId) {
+        SqlSession sqlSession = getSqlSession();
+        mapper = sqlSession.getMapper(OrderMapper.class);
+
+        List<OrderDetailDTO> orderDetailList = mapper.selectOrderDetail(orderId);
+
+        sqlSession.close();
+
+        return orderDetailList;
     }
 }

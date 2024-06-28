@@ -11,16 +11,9 @@
         <result property="productCode" column="product_code"/>
     </resultMap>
 
-    <insert id="insertReview" parameterType="com.ohgiraffers.dto.ReviewDTO">
-        insert into review(
-        ratings,
-        review_detail,
-        product_code
-        )values(
-        #{ ratings },
-        #{ reviewDetail },
-        #{ productCode }
-        )
+    <insert id="insertReview" parameterType="hashmap">
+        INSERT INTO review (ratings, order_id, review_detail, product_code)
+        VALUES (#{ratings}, #{orderId}, #{reviewDetail}, #{productCode})
     </insert>
 
     <update id="updateReview" parameterType="com.ohgiraffers.dto.ReviewDTO">

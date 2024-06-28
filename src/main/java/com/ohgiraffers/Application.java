@@ -78,7 +78,7 @@ public class Application {
                     switch (no){
                         case 1: loginInfo = memberView.memberSubMenu(loginInfo); break;
                         case 2: orderView.orderSubMenu(loginInfo); break;
-                        case 3: reviewView.reviewSubMenu(); break;
+                        case 3: reviewView.reviewSubMenu(loginInfo); break;
                         case 0: flag = false; break;
                         default: System.out.println("잘못된 메뉴를 선택하셨습니다."); break;
                     }

@@ -12,29 +12,17 @@ public class ReviewController {
     private final ReviewService reviewService;
 
     public ReviewController(){
-
         reviewService= new ReviewService();
     }
 
-    public void insertReview(Map<String, String> parameter) {
+    public void insertReview(Map<String, String> map) {
+        int result = reviewService.insertReview(map);
 
-
-        int productCode = Integer.parseInt(parameter.get("productCode"));
-        double ratings= Double.parseDouble(parameter.get("ratings"));
-        String reviewDetail = parameter.get("reviewDetail");
-
-        ReviewDTO review = new ReviewDTO();
-
-        review.setOrderId(productCode);
-        review.setRatings(ratings);
-        review.setReviewDetail(reviewDetail);
-
-        if(reviewService.insertReview(review)) {
-            System.out.println("추가 성공");
+        if (result > 0){
+            System.out.println("리뷰 입력 성공!");
         } else {
-            System.out.println("추가 실패");
+            System.out.println("리뷰 입력 실패!");
         }
-
     }
 
     public void updateReview(Map<String, String> parameter) {

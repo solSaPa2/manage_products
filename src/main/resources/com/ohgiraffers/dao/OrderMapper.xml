@@ -50,6 +50,13 @@
         ORDER BY a.order_id
     </select>
 
+<!--    <select id="selectOrderDetails" parameterType="hashmap" resultMap="_int">-->
+<!--        SELECT DISTINCT b.product_code-->
+<!--        FROM orders a JOIN order_detail b ON (a.order_id = b.order_id)-->
+<!--        WHERE member_id = #{memberId}-->
+<!--        ORDER BY a.order_id-->
+<!--    </select>-->
+
     <update id="updateProductQuantity" parameterType="hashmap">
         UPDATE product
         SET product_quantity = (product_quantity - #{quantity})
@@ -68,4 +75,10 @@
         SET total_price = #{totalPrice}
         WHERE order_id = #{orderId}
     </update>
+
+    <select id="selectOrderDetail" parameterType="string" resultMap="orderDetailResultMap">
+        SELECT *
+        FROM order_detail
+        WHERE order_id = #{orderId}
+    </select>
 </mapper>

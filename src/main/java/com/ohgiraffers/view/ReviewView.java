@@ -1,15 +1,17 @@
 package com.ohgiraffers.view;
 
+import com.ohgiraffers.controller.OrderController;
 import com.ohgiraffers.controller.ReviewController;
-import com.ohgiraffers.dto.ReviewDTO;
+import com.ohgiraffers.dto.OrderDetailDTO;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
 
 public class ReviewView {
 
-    public void reviewSubMenu() {
+    public void reviewSubMenu(Map<String, String> loginInfo) {
         Scanner sc = new Scanner(System.in);
         ReviewController reviewController = new ReviewController();
 
@@ -23,7 +25,7 @@ public class ReviewView {
 
             switch (no) {
                 case 1:
-                    reviewController.insertReview(inputReview());
+                    reviewController.insertReview(inputReview(loginInfo));
                     break;
                 case 2:
                     reviewController.updateReview(inputUpdateReview());
@@ -43,17 +45,32 @@ public class ReviewView {
         } while (true);
     }
 
-    private static Map<String, String> inputReview() {
+    private static Map<String, String> inputReview(Map<String, String> loginInfo) {
+        OrderController orderController = new OrderController();
+        orderController.selectOrderHistory(loginInfo);
+
         Scanner sc = new Scanner(System.in);
 
-        System.out.print("상품의 코드를 입력해주세요 : ");
-        String productCode = sc.nextLine();
-        System.out.print("별점을 입력해주세요 : ");
+        System.out.print("주문 번호를 입력해주세요 : ");
+        String orderId = sc.nextLine();
+
+        String productCode = "";
+
+        List<OrderDetailDTO> orderDetailList = orderController.selectOrderDetail(orderId);    // 주문했던 상품 개수
+        if (orderDetailList.size() == 1){
+            productCode = "" + orderDetailList.get(0).getProductCode();
+        } else {
+            System.out.print("상품 코드를 입력해주세요 : ");
+            productCode = sc.nextLine();
+        }
+
+        System.out.print("별점을 입력해주세요 (1.0 ~ 5.0) : ");
         String ratings = sc.nextLine();
-        System.out.print("세부사항을 입력해주세요 : ");
+        System.out.print("리뷰내용을 입력해주세요 : ");
         String reviewDetail = sc.nextLine();
 
         Map<String, String> parameter = new HashMap<>();
+        parameter.put("orderId", orderId);
         parameter.put("ratings", ratings);
         parameter.put("reviewDetail", reviewDetail);
         parameter.put("productCode", productCode);
