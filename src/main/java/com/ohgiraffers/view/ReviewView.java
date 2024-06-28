@@ -28,7 +28,7 @@ public class ReviewView {
                     reviewController.insertReview(inputReview(loginInfo));
                     break;
                 case 2:
-                    reviewController.updateReview(inputUpdateReview());
+                    reviewController.updateReview(inputUpdateReview(loginInfo));
                     break;
                 case 3:
                     reviewController.deleteReview(inputDeleteReview(loginInfo));
@@ -92,16 +92,17 @@ public class ReviewView {
         return parameter;
     }
 
-    private static Map<String, String> inputUpdateReview() {
-
+    private static Map<String, String> inputUpdateReview(Map<String, String> loginInfo) {
+        ReviewController reviewController = new ReviewController();
+        reviewController.selectMyReviews(loginInfo);
 
         Scanner sc = new Scanner(System.in);
-
-        System.out.print("어떤 리뷰를 수정할지 번호를 입력하세요 : ");
+        System.out.print("위의 리뷰 중 수정할 리뷰 번호를 입력하세요: ");
         int reviewId = sc.nextInt();
 
         System.out.print("수정할 리뷰별점을 입력하세요 : ");
         double ratings = sc.nextDouble();
+        sc.nextLine();
 
         System.out.print("수정할 리뷰 내용을 입력하세요 : ");
         String reviewDetail = sc.nextLine();
