@@ -66,7 +66,6 @@ public class ReviewController {
     }
 
     public void deleteReview(Map<String, String> parameter) {
-
         int reviewId = Integer.parseInt(parameter.get("reviewId"));
 
         if (reviewService.deleteReview(reviewId)) {

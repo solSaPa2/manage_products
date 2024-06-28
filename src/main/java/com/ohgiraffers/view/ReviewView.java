@@ -31,7 +31,7 @@ public class ReviewView {
                     reviewController.updateReview(inputUpdateReview());
                     break;
                 case 3:
-                    reviewController.deleteReview(inputReviewId());
+                    reviewController.deleteReview(inputDeleteReview(loginInfo));
                     break;
                 case 4:
                     reviewController.selectMyReviews(loginInfo);
@@ -45,13 +45,27 @@ public class ReviewView {
         } while (true);
     }
 
+    private Map<String, String> inputDeleteReview(Map<String, String> loginInfo) {
+        ReviewController reviewController = new ReviewController();
+        reviewController.selectMyReviews(loginInfo);
+
+        Scanner sc = new Scanner(System.in);
+        System.out.print("위의 리뷰 중 삭제할 리뷰 번호를 입력하세요: ");
+        String reviewId = sc.nextLine();
+
+        Map<String, String> map = new HashMap<>();
+        map.put("reviewId", reviewId);
+
+        return map;
+    }
+
     private static Map<String, String> inputReview(Map<String, String> loginInfo) {
         OrderController orderController = new OrderController();
         orderController.selectOrderHistory(loginInfo);
 
         Scanner sc = new Scanner(System.in);
 
-        System.out.print("주문 번호를 입력해주세요 : ");
+        System.out.print("주문 번호를 입력해주세요: ");
         String orderId = sc.nextLine();
 
         String productCode = "";
@@ -60,11 +74,11 @@ public class ReviewView {
         if (orderDetailList.size() == 1){
             productCode = "" + orderDetailList.get(0).getProductCode();
         } else {
-            System.out.print("상품 코드를 입력해주세요 : ");
+            System.out.print("상품 코드를 입력해주세요: ");
             productCode = sc.nextLine();
         }
 
-        System.out.print("별점을 입력해주세요 (1.0 ~ 5.0) : ");
+        System.out.print("별점을 입력해주세요 (1.0 ~ 5.0): ");
         String ratings = sc.nextLine();
         System.out.print("리뷰내용을 입력해주세요 : ");
         String reviewDetail = sc.nextLine();
@@ -100,19 +114,6 @@ public class ReviewView {
 
         return parameter;
     }
-
-    private static Map<String, String> inputReviewId() {
-        Scanner sc = new Scanner(System.in);
-        System.out.print("주문자 아이디를 입력하세요 : ");
-        String orderId = sc.nextLine();
-
-        Map<String, String> parameter = new HashMap<>();
-        parameter.put("orderId", orderId);
-
-        return parameter;
-
-    }
-
 
     private static Map<String, String> inputProductCode() {
 
