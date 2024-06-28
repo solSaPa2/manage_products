@@ -1,5 +1,7 @@
 package com.ohgiraffers.controller;
 
+import com.ohgiraffers.dto.ProductDTO;
+import com.ohgiraffers.dto.ProductReviewDTO;
 import com.ohgiraffers.dto.ReviewDTO;
 import com.ohgiraffers.service.ReviewService;
 
@@ -59,6 +61,18 @@ public class ReviewController {
         }
     }
 
+    public void deleteReview(Map<String, String> parameter) {
+
+        int reviewId = Integer.parseInt(parameter.get("reviewId"));
+
+        if (reviewService.deleteReview(reviewId)) {
+            System.out.println("리뷰 삭제를 성공했습니다!");
+        } else {
+            System.out.println("리뷰 삭제를 실패했습니다!");
+        }
+    }
+
+
     public void selectMyReviews(Map<String, String> parameter) {
 
         int orderId = Integer.parseInt(parameter.get("orderId"));
@@ -69,6 +83,28 @@ public class ReviewController {
             System.out.println(reviewDTO);
         } else {
             System.out.println("단일 조회 실패");
+        }
+    }
+
+    public void selectReviewByProductCode(Map<String, String> parameter) {
+
+        int productCode = Integer.parseInt(parameter.get("productCode"));
+
+        ProductDTO product = new ProductDTO();
+
+        product.setProductCode(productCode);
+
+        ProductReviewDTO productReview = reviewService.selectReviewByProductCode(productCode);
+
+        if (productReview != null) {
+
+            for (ReviewDTO review : productReview.getReviewList()) {
+
+                System.out.println("[reviewId] = " + review.getReviewId() + ", 별점 " + review.getRatings() + ", review : " + review.getReviewDetail());
+            }
+
+        } else {
+            System.out.println(" ");
         }
     }
 }

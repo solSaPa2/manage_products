@@ -23,10 +23,10 @@ public class ReviewView {
             switch (no){
                   case 1: reviewController.insertReview(inputReview()); break;
                   case 2: reviewController.updateReview(inputUpdateReview()); break;
-//                case 3: reviewController.deleteReview(); break;
+                  case 3: reviewController.deleteReview(inputReviewId()); break;
                   case 4: reviewController.selectMyReviews(inputReviewId()); break;
-//                case 5: reviewController.selectAllReviewsByProductCode(); break;
-                case 0: return;
+                  case 5: reviewController.selectReviewByProductCode(inputProductCode()); break;
+                  case 0: return;
             }
         } while (true);
     }
@@ -85,5 +85,18 @@ public class ReviewView {
         return parameter;
 
     }
+
+    private static Map<String, String> inputProductCode() {
+
+        Scanner sc = new Scanner(System.in);
+        System.out.print("조회할 리뷰의 상품 번호를 입력하세요 : ");
+        String productCode = sc.nextLine();
+
+        Map<String, String> parameter = new HashMap<>();
+        parameter.put("productCode",productCode);
+
+        return parameter;
+    }
+
 
 }
