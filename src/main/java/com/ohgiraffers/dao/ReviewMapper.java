@@ -7,4 +7,7 @@ public interface ReviewMapper {
     int insertReview(ReviewDTO reviewDTO);
 
     int updateReview(ReviewDTO review);
+
+
+    ReviewDTO selectMyReviews(int orderId);
 }

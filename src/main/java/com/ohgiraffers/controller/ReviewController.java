@@ -1,5 +1,7 @@
 package com.ohgiraffers.controller;
 
+import com.ohgiraffers.dto.OrderDetailDTO;
+import com.ohgiraffers.dto.ProductDTO;
 import com.ohgiraffers.dto.ReviewDTO;
 import com.ohgiraffers.service.ReviewService;
 
@@ -56,6 +58,19 @@ public class ReviewController {
             System.out.println("리뷰 수정을 성공했습니다!");
         } else {
             System.out.println("리뷰 수정을 실패했습니다!");
+        }
+    }
+
+    public void selectMyReviews(Map<String, String> parameter) {
+
+        int orderId = Integer.parseInt(parameter.get("orderId"));
+
+        ReviewDTO reviewDTO =reviewService.selectMyReviews(orderId);
+
+        if( reviewDTO != null) {
+            System.out.println(reviewDTO);
+        } else {
+            System.out.println("단일 조회 실패");
         }
     }
 }

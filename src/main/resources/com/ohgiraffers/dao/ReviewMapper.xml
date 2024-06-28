@@ -34,4 +34,15 @@
         where
         review_id = #{ reviewId }
     </update>
+
+    <select id="selectMyReviews" parameterType="_int" resultMap="ReviewResultMap">
+        select
+        review_id,
+        ratings,
+        order_id,
+        review_detail,
+        product_code
+        from review
+        where order_id = #{ orderId }
+    </select>
 </mapper>
