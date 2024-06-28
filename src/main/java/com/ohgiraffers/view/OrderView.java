@@ -15,6 +15,7 @@ public class OrderView {
         boolean flag = true;
 
         do {
+            System.out.println("\n=============== 상품 메뉴 ===============");
             System.out.println("1. 상품 구매하기");
             System.out.println("2. 상품 구매 히스토리 조회");
             System.out.println("----------------------------------------");
@@ -24,7 +25,7 @@ public class OrderView {
 
             switch (no){
                 case 1: orderController.insertOrder(inputOrder(loginInfo)); break;
-//                case 2: orderController.selectOrderHistory(); break;
+                case 2: orderController.selectOrderHistory(loginInfo); break;
                 case 0: flag = false; break;
             }
         } while (flag);

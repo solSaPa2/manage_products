@@ -1,7 +1,12 @@
 package com.ohgiraffers.controller;
 
+import com.ohgiraffers.dto.MemberDTO;
+import com.ohgiraffers.dto.OrderDetailDTO;
+import com.ohgiraffers.dto.OrdersDTO;
+import com.ohgiraffers.dto.OrdersOrderDetailDTO;
 import com.ohgiraffers.service.OrderService;
 
+import java.util.List;
 import java.util.Map;
 
 public class OrderController {
@@ -18,6 +23,23 @@ public class OrderController {
             System.out.println("주문 성공!");
         } else {
             System.out.println("주문 실패!");
+        }
+    }
+
+    public void selectOrderHistory(Map<String, String> loginInfo) {
+        List<OrdersOrderDetailDTO> ordersList = orderService.selectOrderHistory(loginInfo);
+
+        for (OrdersOrderDetailDTO orders : ordersList){
+            System.out.println("===============================================");
+            System.out.println("주문 번호: " + orders.getOrderId());
+            System.out.println("주문 시간: " + orders.getOrderTime());
+            System.out.println("주문 총액: " + orders.getTotalPrice());
+
+            System.out.println("주문한 물품 리스트: ");
+            for (OrderDetailDTO detail : orders.getOrderDetailList()){
+                System.out.println("\t상품 코드: " + detail.getProductCode() + ", 수량: " + detail.getQuantity());
+            }
+            System.out.println("===============================================");
         }
     }
 }
