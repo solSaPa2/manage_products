@@ -1,12 +1,12 @@
 package com.ohgiraffers.service;
 
-import com.mysql.cj.protocol.x.XProtocolDecoder;
-import com.ohgiraffers.dao.MemberMapper;
 import com.ohgiraffers.dao.OrderMapper;
+import com.ohgiraffers.dto.MemberDTO;
+import com.ohgiraffers.dto.OrdersOrderDetailDTO;
 import org.apache.ibatis.session.SqlSession;
 
-import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import static com.ohgiraffers.common.Template.getSqlSession;
@@ -51,5 +51,16 @@ public class OrderService {
         sqlSession.close();
 
         return result;
+    }
+
+    public List<OrdersOrderDetailDTO> selectOrderHistory(Map<String, String> loginInfo) {
+        SqlSession sqlSession = getSqlSession();
+        mapper = sqlSession.getMapper(OrderMapper.class);
+
+        List<OrdersOrderDetailDTO> ordersList = mapper.selectOrderHistory(loginInfo);
+
+        sqlSession.close();
+
+        return ordersList;
     }
 }

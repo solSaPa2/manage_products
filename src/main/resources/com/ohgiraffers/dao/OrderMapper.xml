@@ -30,4 +30,23 @@
         VALUES (#{orderId}, #{productCode}, #{quantity})
     </insert>
 
+    <resultMap id="ordersOrderDetailResultMap" type="com.ohgiraffers.dto.OrdersOrderDetailDTO">
+        <id property="orderId" column="order_id"/>
+        <result property="orderTime" column="order_time"/>
+        <result property="totalPrice" column="total_price"/>
+        <result property="memberId" column="member_id"/>
+
+        <collection property="orderDetailList" ofType="com.ohgiraffers.dto.OrderDetailDTO">
+            <id property="orderId" column="order_id"/>
+            <id property="productCode" column="product_code"/>
+            <result property="quantity" column="quantity"/>
+        </collection>
+    </resultMap>
+
+    <select id="selectOrderHistory" parameterType="hashmap" resultMap="ordersOrderDetailResultMap">
+        SELECT a.order_id, a.order_time, a.total_price, a.member_id, b.product_code, b.quantity
+        FROM orders a JOIN order_detail b ON (a.order_id = b.order_id)
+        WHERE member_id = #{memberId}
+        ORDER BY a.order_id
+    </select>
 </mapper>

@@ -1,5 +1,8 @@
 package com.ohgiraffers.dao;
 
+import com.ohgiraffers.dto.OrdersOrderDetailDTO;
+
+import java.util.List;
 import java.util.Map;
 
 public interface OrderMapper {
@@ -9,5 +12,5 @@ public interface OrderMapper {
 
     int insertOrderDetail(Map<String, String> map);
 
-
+    List<OrdersOrderDetailDTO> selectOrderHistory(Map<String, String> loginInfo);
 }
