@@ -23,7 +23,7 @@ public class ReviewView {
             switch (no){
                   case 1: reviewController.insertReview(inputMenu()); break;
                   case 2: reviewController.updateReview(inputUpdateReview()); break;
-//                case 3: reviewController.deleteReview(); break;
+                  case 3: reviewController.deleteReview(inputReviewId()); break;
 //                case 4: reviewController.selectMyReviews(); break;
 //                case 5: reviewController.selectAllReviewsByProductCode(); break;
                 case 0: return;
@@ -74,4 +74,15 @@ public class ReviewView {
         return parameter;
     }
 
+    private static Map<String, String> inputReviewId() {
+
+        Scanner sc = new Scanner(System.in);
+        System.out.print("리뷰 번호를 입력하세요 : ");
+        String reviewId = sc.nextLine();
+
+        Map<String, String> parameter = new HashMap<>();
+        parameter.put("reviewId",reviewId);
+
+        return parameter;
+    }
 }

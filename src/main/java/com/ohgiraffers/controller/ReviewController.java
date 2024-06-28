@@ -58,4 +58,15 @@ public class ReviewController {
             System.out.println("리뷰 수정을 실패했습니다!");
         }
     }
+
+    public void deleteReview(Map<String, String> parameter) {
+
+        int reviewId = Integer.parseInt(parameter.get("reviewId"));
+
+        if (reviewService.deleteReview(reviewId)) {
+            System.out.println("리뷰 삭제를 성공했습니다!");
+        } else {
+            System.out.println("리뷰 삭제를 실패했습니다!");
+        }
+    }
 }

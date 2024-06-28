@@ -1,5 +1,6 @@
 package com.ohgiraffers.service;
 
+import com.ohgiraffers.dao.CategoryMapper;
 import com.ohgiraffers.dao.ProductMapper;
 import com.ohgiraffers.dao.ReviewMapper;
 import com.ohgiraffers.dto.ReviewDTO;
@@ -35,6 +36,25 @@ public class ReviewService {
         Mapper = sqlSession.getMapper(ReviewMapper.class);
 
         int result = Mapper.updateReview(review);
+
+        if(result > 0) {
+            sqlSession.commit();
+        } else {
+            sqlSession.rollback();
+        }
+
+        sqlSession.close();
+
+        return result > 0 ? true : false;
+    }
+
+    public boolean deleteReview(int review) {
+
+        SqlSession sqlSession = getSqlSession();
+
+        Mapper = sqlSession.getMapper(ReviewMapper.class);
+
+        int result = Mapper.deleteReview(review);
 
         if(result > 0) {
             sqlSession.commit();
