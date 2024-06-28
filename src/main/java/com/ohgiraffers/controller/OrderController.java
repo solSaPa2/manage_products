@@ -29,17 +29,21 @@ public class OrderController {
     public void selectOrderHistory(Map<String, String> loginInfo) {
         List<OrdersOrderDetailDTO> ordersList = orderService.selectOrderHistory(loginInfo);
 
-        for (OrdersOrderDetailDTO orders : ordersList){
-            System.out.println("===============================================");
-            System.out.println("주문 번호: " + orders.getOrderId());
-            System.out.println("주문 시간: " + orders.getOrderTime());
-            System.out.println("주문 총액: " + orders.getTotalPrice());
+        if (ordersList.size() == 0){
+            System.out.println("주문 내역이 없습니다.");
+        } else{
+            for (OrdersOrderDetailDTO orders : ordersList){
+                System.out.println("===============================================");
+                System.out.println("주문 번호: " + orders.getOrderId());
+                System.out.println("주문 시간: " + orders.getOrderTime());
+                System.out.println("주문 총액: " + orders.getTotalPrice());
 
-            System.out.println("주문한 물품 리스트: ");
-            for (OrderDetailDTO detail : orders.getOrderDetailList()){
-                System.out.println("\t상품 코드: " + detail.getProductCode() + ", 수량: " + detail.getQuantity());
+                System.out.println("주문한 물품 리스트: ");
+                for (OrderDetailDTO detail : orders.getOrderDetailList()){
+                    System.out.println("\t상품 코드: " + detail.getProductCode() + ", 수량: " + detail.getQuantity());
+                }
+                System.out.println("===============================================");
             }
-            System.out.println("===============================================");
         }
     }
 }
