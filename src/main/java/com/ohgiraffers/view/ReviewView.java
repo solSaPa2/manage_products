@@ -1,6 +1,7 @@
 package com.ohgiraffers.view;
 
 import com.ohgiraffers.controller.ReviewController;
+import com.ohgiraffers.dto.ReviewDTO;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -20,18 +21,29 @@ public class ReviewView {
             int no = sc.nextInt();
             sc.nextLine();
 
-            switch (no){
-                  case 1: reviewController.insertReview(inputReview()); break;
-                  case 2: reviewController.updateReview(inputUpdateReview()); break;
-//                case 3: reviewController.deleteReview(); break;
-                  case 4: reviewController.selectMyReviews(inputReviewId()); break;
-//                case 5: reviewController.selectAllReviewsByProductCode(); break;
-                case 0: return;
+            switch (no) {
+                case 1:
+                    reviewController.insertReview(inputReview());
+                    break;
+                case 2:
+                    reviewController.updateReview(inputUpdateReview());
+                    break;
+                case 3:
+                    reviewController.deleteReview(inputReviewId());
+                    break;
+                case 4:
+                    reviewController.selectMyReviews(inputReviewId());
+                    break;
+                case 5:
+                    reviewController.selectReviewByProductCode(inputProductCode());
+                    break;
+                case 0:
+                    return;
             }
         } while (true);
     }
 
-    private  static Map<String, String > inputReview() {
+    private static Map<String, String> inputReview() {
         Scanner sc = new Scanner(System.in);
 
         System.out.print("추가할 별점을 입력하세요 : ");
@@ -44,15 +56,16 @@ public class ReviewView {
         String productCode = sc.nextLine();
 
         Map<String, String> parameter = new HashMap<>();
-        parameter.put("ratings",ratings);
-        parameter.put("reviewDetail",reviewDetail);
+        parameter.put("ratings", ratings);
+        parameter.put("reviewDetail", reviewDetail);
         parameter.put("productCode", productCode);
-        parameter.put("orderId",orderId);
+        parameter.put("orderId", orderId);
         return parameter;
 
     }
 
     private static Map<String, String> inputUpdateReview() {
+
 
         Scanner sc = new Scanner(System.in);
 
@@ -69,21 +82,34 @@ public class ReviewView {
 
         parameter.put("reviewId", String.valueOf(reviewId));
         parameter.put("ratings", String.valueOf(ratings));
-        parameter.put("reviewDetail",reviewDetail);
+        parameter.put("reviewDetail", reviewDetail);
 
         return parameter;
     }
 
-    private  static Map<String, String > inputReviewId() {
+    private static Map<String, String> inputReviewId() {
         Scanner sc = new Scanner(System.in);
         System.out.print("주문자 아이디를 입력하세요 : ");
         String orderId = sc.nextLine();
 
         Map<String, String> parameter = new HashMap<>();
-        parameter.put("orderId",orderId);
+        parameter.put("orderId", orderId);
 
         return parameter;
 
+    }
+
+
+    private static Map<String, String> inputProductCode() {
+
+        Scanner sc = new Scanner(System.in);
+        System.out.print("조회할 리뷰의 상품 번호를 입력하세요 : ");
+        String productCode = sc.nextLine();
+
+        Map<String, String> parameter = new HashMap<>();
+        parameter.put("productCode", productCode);
+
+        return parameter;
     }
 
 }
