@@ -9,10 +9,6 @@ public interface ReviewMapper {
 
     int updateReview(ReviewDTO review);
 
-    int deleteReview(int review);
-
-    ProductReviewDTO selectReviewByProductCode(int productCode);
-
     ReviewDTO selectMyReviews(int orderId);
 
     int deleteReview(int review);

@@ -1,6 +1,7 @@
 package com.ohgiraffers.view;
 
 import com.ohgiraffers.controller.ReviewController;
+import com.ohgiraffers.dto.ReviewDTO;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -45,22 +46,19 @@ public class ReviewView {
     private static Map<String, String> inputReview() {
         Scanner sc = new Scanner(System.in);
 
-        System.out.print("추가할 별점을 입력하세요 : ");
-        String ratings = sc.nextLine();
-        System.out.print("추가할 구매자 아이디를 입력해주세요 : ");
-        String orderId = sc.nextLine();
-        System.out.print("추가할 세부사항을 입력해주세요 : ");
-        String reviewDetail = sc.nextLine();
-        System.out.print("추가할 상품 코드를 입력해주세요 : ");
+        System.out.print("상품의 코드를 입력해주세요 : ");
         String productCode = sc.nextLine();
+        System.out.print("별점을 입력해주세요 : ");
+        String ratings = sc.nextLine();
+        System.out.print("세부사항을 입력해주세요 : ");
+        String reviewDetail = sc.nextLine();
 
         Map<String, String> parameter = new HashMap<>();
         parameter.put("ratings", ratings);
         parameter.put("reviewDetail", reviewDetail);
         parameter.put("productCode", productCode);
-        parameter.put("orderId", orderId);
-        return parameter;
 
+        return parameter;
     }
 
     private static Map<String, String> inputUpdateReview() {
@@ -92,7 +90,7 @@ public class ReviewView {
         String orderId = sc.nextLine();
 
         Map<String, String> parameter = new HashMap<>();
-        parameter.put("orderId",orderId);
+        parameter.put("orderId", orderId);
 
         return parameter;
 
