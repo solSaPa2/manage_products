@@ -13,4 +13,10 @@ public interface OrderMapper {
     int insertOrderDetail(Map<String, String> map);
 
     List<OrdersOrderDetailDTO> selectOrderHistory(Map<String, String> loginInfo);
+
+    int updateProductQuantity(Map<String, String> map);
+
+    int getProductPrice(Map<String, String> map);
+
+    int updateOrderTotalPrice(Map<String, String> inputMap2);
 }

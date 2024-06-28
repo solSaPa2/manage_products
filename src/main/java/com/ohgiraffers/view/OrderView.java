@@ -18,6 +18,7 @@ public class OrderView {
             System.out.println("\n=============== 상품 메뉴 ===============");
             System.out.println("1. 상품 구매하기");
             System.out.println("2. 상품 구매 히스토리 조회");
+            System.out.println("0. 이전 메뉴로");
             System.out.println("----------------------------------------");
             System.out.print("번호 입력: ");
             int no = sc.nextInt();

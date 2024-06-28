@@ -1,8 +1,6 @@
 package com.ohgiraffers.controller;
 
-import com.ohgiraffers.dto.MemberDTO;
 import com.ohgiraffers.dto.OrderDetailDTO;
-import com.ohgiraffers.dto.OrdersDTO;
 import com.ohgiraffers.dto.OrdersOrderDetailDTO;
 import com.ohgiraffers.service.OrderService;
 
@@ -19,10 +17,14 @@ public class OrderController {
     public void insertOrder(Map<String, String> map) {
         int result = orderService.insertOrder(map);
 
-        if (result > 0){
-            System.out.println("주문 성공!");
-        } else {
-            System.out.println("주문 실패!");
+        if (map.size()-1 > 0){
+            if (result > 0){
+                System.out.println("주문 성공!");
+            } else {
+                System.out.println("주문 실패!");
+            }
+        } else{
+            System.out.println("주문할 상품을 입력하지 않으셨습니다.");
         }
     }
 

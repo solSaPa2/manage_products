@@ -1,7 +1,6 @@
 package com.ohgiraffers.service;
 
 import com.ohgiraffers.dao.OrderMapper;
-import com.ohgiraffers.dto.MemberDTO;
 import com.ohgiraffers.dto.OrdersOrderDetailDTO;
 import org.apache.ibatis.session.SqlSession;
 
@@ -25,6 +24,7 @@ public class OrderService {
             int orderId = mapper.selectLastOrderId();
 
             int n = (map.size()-1)/2;
+            int totalPrice = 0;
             for (int i = 0; i < n; i++){
                 Map<String,String> inputMap = new HashMap<>();
 
@@ -32,13 +32,27 @@ public class OrderService {
                 inputMap.put("productCode", map.get("productCode" + i));
                 inputMap.put("quantity", map.get("quantity" + i));
 
-                result = mapper.insertOrderDetail(inputMap);
-                if (result == 0){
+                // product에서 주문한 quantity만큼 줄이기
+                result = mapper.updateProductQuantity(inputMap);
+
+                if (result > 0){
+                    // product의 재고가 충분하면 주문 진행
+                    result = mapper.insertOrderDetail(inputMap);
+                } else{
+                    System.out.println("재고가 부족합니다.");
                     break;
                 }
 
-                // TODO: product에서 quantity만큼 줄이기
+                // product price 계산
+                totalPrice += (mapper.getProductPrice(inputMap) * Integer.parseInt(inputMap.put("quantity", map.get("quantity" + i))));
+            }
 
+            if (result > 0){
+                // orders 테이블에 total_price 업데이트
+                Map<String,String> inputMap2 = new HashMap<>();
+                inputMap2.put("orderId", Integer.toString(orderId));
+                inputMap2.put("totalPrice", Integer.toString(totalPrice));
+                result = mapper.updateOrderTotalPrice(inputMap2);
             }
         }
 
