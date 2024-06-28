@@ -61,6 +61,19 @@ public class ReviewController {
         }
     }
 
+    public void selectMyReviews(Map<String, String> parameter) {
+
+        int orderId = Integer.parseInt(parameter.get("orderId"));
+
+        ReviewDTO reviewDTO = reviewService.selectMyReviews(orderId);
+
+        if( reviewDTO != null) {
+            System.out.println(reviewDTO);
+        } else {
+            System.out.println("단일 조회 실패");
+        }
+    }
+
     public void deleteReview(Map<String, String> parameter) {
 
         int reviewId = Integer.parseInt(parameter.get("reviewId"));
@@ -69,20 +82,6 @@ public class ReviewController {
             System.out.println("리뷰 삭제를 성공했습니다!");
         } else {
             System.out.println("리뷰 삭제를 실패했습니다!");
-        }
-    }
-
-
-    public void selectMyReviews(Map<String, String> parameter) {
-
-        int orderId = Integer.parseInt(parameter.get("orderId"));
-
-        ReviewDTO reviewDTO =reviewService.selectMyReviews(orderId);
-
-        if( reviewDTO != null) {
-            System.out.println(reviewDTO);
-        } else {
-            System.out.println("단일 조회 실패");
         }
     }
 
@@ -104,7 +103,7 @@ public class ReviewController {
             }
 
         } else {
-            System.out.println(" ");
+            System.out.println("리뷰가 존재하지 않습니다.");
         }
     }
 }

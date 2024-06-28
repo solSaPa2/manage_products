@@ -3,7 +3,6 @@ package com.ohgiraffers.service;
 import com.ohgiraffers.dao.ProductMapper;
 import com.ohgiraffers.dao.ReviewMapper;
 import com.ohgiraffers.dto.ProductDTO;
-import com.ohgiraffers.dto.ProductReviewDTO;
 import com.ohgiraffers.dto.ReviewDTO;
 import org.apache.ibatis.session.SqlSession;
 
@@ -49,6 +48,19 @@ public class ReviewService {
         return result > 0 ? true : false;
     }
 
+    public ReviewDTO selectMyReviews(int orderId) {
+
+        SqlSession sqlSession = getSqlSession();
+
+        Mapper = sqlSession.getMapper(ReviewMapper.class);
+
+        ReviewDTO reviewDTO = Mapper.selectMyReviews(orderId);
+
+        sqlSession.close();
+
+        return reviewDTO;
+    }
+
     public boolean deleteReview(int review) {
 
         SqlSession sqlSession = getSqlSession();
@@ -66,19 +78,6 @@ public class ReviewService {
         sqlSession.close();
 
         return result > 0 ? true : false;
-    }
-
-    public ReviewDTO selectMyReviews(int orderId) {
-
-        SqlSession sqlSession = getSqlSession();
-
-        Mapper = sqlSession.getMapper(ReviewMapper.class);
-
-        ReviewDTO reviewDTO = Mapper.selectMyReviews(orderId);
-
-        sqlSession.close();
-
-        return reviewDTO;
     }
 
     public ProductReviewDTO selectReviewByProductCode(int productCode) {
