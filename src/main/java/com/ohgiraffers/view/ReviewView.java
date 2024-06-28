@@ -1,5 +1,6 @@
 package com.ohgiraffers.view;
 
+import com.ohgiraffers.controller.ProductController;
 import com.ohgiraffers.controller.ReviewController;
 
 import java.util.HashMap;
@@ -87,9 +88,11 @@ public class ReviewView {
     }
 
     private static Map<String, String> inputProductCode() {
+        ProductController productController = new ProductController();
+        productController.selectAllProducts();
 
         Scanner sc = new Scanner(System.in);
-        System.out.print("조회할 리뷰의 상품 번호를 입력하세요 : ");
+        System.out.print("위 상품들 중 조회할 리뷰의 상품 번호를 입력하세요 : ");
         String productCode = sc.nextLine();
 
         Map<String, String> parameter = new HashMap<>();
@@ -97,6 +100,4 @@ public class ReviewView {
 
         return parameter;
     }
-
-
 }
