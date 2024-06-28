@@ -1,9 +1,6 @@
 package com.ohgiraffers;
 
-import com.ohgiraffers.view.CategoryView;
-import com.ohgiraffers.view.MemberView;
-import com.ohgiraffers.view.ProductView;
-import com.ohgiraffers.view.ReviewView;
+import com.ohgiraffers.view.*;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -22,6 +19,7 @@ public class Application {
         ProductView productView = new ProductView();
         CategoryView categoryView = new CategoryView();
         ReviewView reviewView = new ReviewView();
+        OrderView orderView = new OrderView();
 
         do{
             System.out.println("\n================ 상품 관리 시스템 ================");
@@ -70,7 +68,8 @@ public class Application {
                     }
                 } else {
                     // 일반 회원
-                    System.out.println("2. 리뷰 관리");
+                    System.out.println("2. 상품 구매 / 오더 히스토리 보기");
+                    System.out.println("3. 리뷰 관리");
                     System.out.println("0. 프로그램 종료\n" +
                             "------------------------------------------------");
                     System.out.print("번호 입력 : ");
@@ -78,7 +77,8 @@ public class Application {
 
                     switch (no){
                         case 1: loginInfo = memberView.memberSubMenu(loginInfo); break;
-                        case 2: reviewView.reviewSubMenu(); break;
+                        case 2: orderView.orderSubMenu(loginInfo); break;
+                        case 3: reviewView.reviewSubMenu(loginInfo); break;
                         case 0: flag = false; break;
                         default: System.out.println("잘못된 메뉴를 선택하셨습니다."); break;
                     }

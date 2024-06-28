@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ohgiraffers.dao.OrderMapper">
+    <resultMap id="ordersResultMap" type="com.ohgiraffers.dto.OrdersDTO">
+        <id property="orderId" column="order_id"/>
+        <result property="orderTime" column="order_time"/>
+        <result property="totalPrice" column="total_price"/>
+        <result property="memberId" column="member_id"/>
+    </resultMap>
+
+    <resultMap id="orderDetailResultMap" type="com.ohgiraffers.dto.OrderDetailDTO">
+        <id property="orderId" column="order_id"/>
+        <id property="productCode" column="product_code"/>
+        <result property="quantity" column="quantity"/>
+    </resultMap>
+
+    <insert id="insertOrders" parameterType="hashmap">
+        INSERT INTO orders (order_time, member_id)
+        VALUES (current_timestamp(), #{memberId})
+    </insert>
+
+    <select id="selectLastOrderId" resultType="int">
+        SELECT LAST_INSERT_ID()
+    </select>
+
+    <insert id="insertOrderDetail" parameterType="hashmap">
+        INSERT INTO order_detail (order_id, product_code, quantity)
+        VALUES (#{orderId}, #{productCode}, #{quantity})
+    </insert>
+
+    <resultMap id="ordersOrderDetailResultMap" type="com.ohgiraffers.dto.OrdersOrderDetailDTO">
+        <id property="orderId" column="order_id"/>
+        <result property="orderTime" column="order_time"/>
+        <result property="totalPrice" column="total_price"/>
+        <result property="memberId" column="member_id"/>
+
+        <collection property="orderDetailList" ofType="com.ohgiraffers.dto.OrderDetailDTO">
+            <id property="orderId" column="order_id"/>
+            <id property="productCode" column="product_code"/>
+            <result property="quantity" column="quantity"/>
+        </collection>
+    </resultMap>
+
+    <select id="selectOrderHistory" parameterType="hashmap" resultMap="ordersOrderDetailResultMap">
+        SELECT a.order_id, a.order_time, a.total_price, a.member_id, b.product_code, b.quantity
+        FROM orders a JOIN order_detail b ON (a.order_id = b.order_id)
+        WHERE member_id = #{memberId}
+        ORDER BY a.order_id
+    </select>
+
+<!--    <select id="selectOrderDetails" parameterType="hashmap" resultMap="_int">-->
+<!--        SELECT DISTINCT b.product_code-->
+<!--        FROM orders a JOIN order_detail b ON (a.order_id = b.order_id)-->
+<!--        WHERE member_id = #{memberId}-->
+<!--        ORDER BY a.order_id-->
+<!--    </select>-->
+
+    <update id="updateProductQuantity" parameterType="hashmap">
+        UPDATE product
+        SET product_quantity = (product_quantity - #{quantity})
+        WHERE product_code = #{productCode}
+            AND (product_quantity - #{quantity}) > 0
+    </update>
+
+    <select id="getProductPrice" parameterType="hashmap" resultType="_int">
+        SELECT product_price
+        FROM product
+        WHERE product_code = #{productCode}
+    </select>
+
+    <update id="updateOrderTotalPrice" parameterType="hashmap">
+        UPDATE orders
+        SET total_price = #{totalPrice}
+        WHERE order_id = #{orderId}
+    </update>
+
+    <select id="selectOrderDetail" parameterType="string" resultMap="orderDetailResultMap">
+        SELECT *
+        FROM order_detail
+        WHERE order_id = #{orderId}
+    </select>
+</mapper>

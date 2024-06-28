@@ -11,18 +11,9 @@
         <result property="productCode" column="product_code"/>
     </resultMap>
 
-    <insert id="insertReview" parameterType="com.ohgiraffers.dto.ReviewDTO">
-        insert into review(
-        ratings,
-        order_id,
-        review_detail,
-        product_code
-        )values(
-        #{ ratings },
-        #{ orderId },
-        #{ reviewDetail },
-        #{ productCode }
-        )
+    <insert id="insertReview" parameterType="hashmap">
+        INSERT INTO review (ratings, order_id, review_detail, product_code)
+        VALUES (#{ratings}, #{orderId}, #{reviewDetail}, #{productCode})
     </insert>
 
     <update id="updateReview" parameterType="com.ohgiraffers.dto.ReviewDTO">
@@ -34,6 +25,17 @@
         where
         review_id = #{ reviewId }
     </update>
+
+    <select id="selectMyReviews" parameterType="_int" resultMap="ReviewResultMap">
+        select
+        review_id,
+        ratings,
+        order_id,
+        review_detail,
+        product_code
+        from review
+        where order_id = #{ orderId }
+    </select>
 
     <delete id="deleteReview" parameterType="_int">
         delete
@@ -65,5 +67,10 @@
         left join product b on (a.product_code = b.product_code)
         where b.product_code = #{ productCode }
         order by a.product_code
+    </select>
+
+    <select id="selectReviewByOrderId" resultMap="ReviewResultMap">
+        SELECT * FROM review
+        WHERE order_id = #{orderId}
     </select>
 </mapper>

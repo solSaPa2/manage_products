@@ -1,8 +1,11 @@
 package com.ohgiraffers.controller;
 
 import com.ohgiraffers.dto.*;
+import com.ohgiraffers.service.OrderService;
 import com.ohgiraffers.service.ReviewService;
 
+import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class ReviewController {
@@ -13,42 +16,26 @@ public class ReviewController {
         reviewService= new ReviewService();
     }
 
-    public void insertReview(Map<String, String> parameter) {
+    public void insertReview(Map<String, String> map) {
+        int result = reviewService.insertReview(map);
 
-
-        double ratings= Double.parseDouble(parameter.get("ratings"));
-        String reviewDetail = parameter.get("reviewDetail");
-        int productCode = Integer.parseInt(parameter.get("productCode"));
-        int orderId = Integer.parseInt(parameter.get("orderId"));
-
-        ReviewDTO review = new ReviewDTO();
-
-
-        review.setRatings(ratings);
-        review.setReviewDetail(reviewDetail);
-        review.setOrderId(orderId);
-        review.setProductCode(productCode);
-
-        if(reviewService.insertReview(review)) {
-            System.out.println("추가 성공");
+        if (result > 0){
+            System.out.println("리뷰 입력 성공!");
         } else {
-            System.out.println("추가 실패");
+            System.out.println("리뷰 입력 실패!");
         }
-
     }
 
     public void updateReview(Map<String, String> parameter) {
 
         int reviewId = Integer.parseInt(parameter.get("reviewId"));
         double ratings = Double.parseDouble(parameter.get("ratings"));
-        int orderId = Integer.parseInt(parameter.get("orderId"));
         String reviewDetail = parameter.get("reviewDetail");
 
         ReviewDTO review = new ReviewDTO();
 
         review.setReviewId(reviewId);
         review.setRatings(ratings);
-        review.setOrderId(orderId);
         review.setReviewDetail(reviewDetail);
 
 
@@ -59,8 +46,26 @@ public class ReviewController {
         }
     }
 
-    public void deleteReview(Map<String, String> parameter) {
+    public void selectMyReviews(Map<String, String> loginInfo) {
+        OrderService orderService = new OrderService();
+        List<OrdersOrderDetailDTO> ordersList = orderService.selectOrderHistory(loginInfo);
 
+        if (ordersList.size() == 0){
+            System.out.println("리뷰 내역이 없습니다.");
+        } else {
+            for (OrdersOrderDetailDTO orders : ordersList){
+                Map<String,String> map = new HashMap<>();
+                map.put("orderId", orders.getOrderId() + "");
+
+                List<ReviewDTO> reviewList = reviewService.selectReviewByOrderId(map);
+                for (ReviewDTO review : reviewList){
+                    System.out.println(review);
+                }
+            }
+        }
+    }
+
+    public void deleteReview(Map<String, String> parameter) {
         int reviewId = Integer.parseInt(parameter.get("reviewId"));
 
         if (reviewService.deleteReview(reviewId)) {
@@ -88,7 +93,7 @@ public class ReviewController {
             }
 
         } else {
-            System.out.println(" ");
+            System.out.println("리뷰가 존재하지 않습니다.");
         }
     }
 }
