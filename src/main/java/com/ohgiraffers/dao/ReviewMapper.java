@@ -8,6 +8,5 @@ public interface ReviewMapper {
 
     int updateReview(ReviewDTO review);
 
-
     ReviewDTO selectMyReviews(int orderId);
 }
