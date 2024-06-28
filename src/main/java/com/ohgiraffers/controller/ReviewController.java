@@ -1,7 +1,5 @@
 package com.ohgiraffers.controller;
 
-import com.ohgiraffers.dto.OrderDetailDTO;
-import com.ohgiraffers.dto.ProductDTO;
 import com.ohgiraffers.dto.ReviewDTO;
 import com.ohgiraffers.service.ReviewService;
 
